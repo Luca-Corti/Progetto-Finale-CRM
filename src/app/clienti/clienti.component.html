@@ -1,0 +1,122 @@
+<nz-layout class="layout">
+  <nz-sider nzCollapsible nzBreakpoint="lg" [nzCollapsedWidth]="0">
+    <div class="logo" routerLink="/home"></div>
+    <ul nz-menu nzTheme="dark" nzMode="inline">
+      <li nz-menu-item routerLink="/clienti">
+        <i nz-icon nzType="user" nzTheme="outline"></i>
+        <span>Clienti</span>
+      </li>
+      <li nz-menu-item routerLink="/fatture">
+        <i nz-icon nzType="file-search" nzTheme="outline"></i>
+        <span>Fatture</span>
+      </li>
+      <li nz-menu-item routerLink="/utenti">
+        <i nz-icon nzType="team" nzTheme="outline"></i>
+        <span>Utenti</span>
+      </li>
+      <li nz-menu-item>
+        <i nz-icon nzType="user"></i>
+        <span>nav 4</span>
+      </li>
+    </ul>
+  </nz-sider>
+  <nz-layout>
+    <nz-header>
+
+      <nz-page-header-extra>
+        <button nz-button routerLink="/register">SignUp</button>
+        <button nz-button nzType="primary" nzDanger>Logout</button>
+        <nz-avatar nz-page-header-avatar nzSrc="https://avatars0.githubusercontent.com/u/22736418?s=88&v=4"></nz-avatar>
+        <a nz-dropdown [nzDropdownMenu]="menu">
+          <nz-page-header-title>Gigi Calamaro <i nz-icon nzType="down" style="font-size: 10px;"></i>
+          </nz-page-header-title>
+          <nz-page-header-tags>
+            <nz-tag [nzColor]="status.color">{{status.name}}</nz-tag>
+          </nz-page-header-tags>
+        </a>
+        <nz-dropdown-menu #menu="nzDropdownMenu">
+          <ul nz-menu nzSelectable>
+            <li nz-menu-item>Il mio profilo</li>
+            <li nz-menu-item>Settings</li>
+            <li nz-submenu nzTitle="Cambia stato">
+              <ul>
+                <li nz-menu-item (click)="changeStatus('Online')">Online</li>
+                <li nz-menu-item (click)="changeStatus('ND')">Non disponibile</li>
+                <li nz-menu-item (click)="changeStatus('Offline')">Offline</li>
+                <li nz-menu-item (click)="changeStatus('Invisibile')">Invisibile</li>
+              </ul>
+            <li nz-menu-item>Invia un feedback</li>
+            <li nz-menu-item nzDanger>Esci</li>
+          </ul>
+        </nz-dropdown-menu>
+      </nz-page-header-extra>
+
+
+    </nz-header>
+    <nz-content>
+      <nz-page-header>
+        <nz-page-header-title>Clienti</nz-page-header-title>
+        <nz-page-header-extra>
+          <button nz-button (click)="showModal()">Nuovo Cliente</button>
+          <button nz-button>Cerca Cliente</button>
+          <button nz-button nzType="primary">Lorem</button>
+        </nz-page-header-extra>
+        <nz-modal
+        nzMaskClosable="false"
+        [(nzVisible)]="isVisible"
+        nzWidth="60vw"
+        nzTitle="Crea Nuovo Cliente"
+        (nzOnCancel)="handleCancel()"
+        (nzOnOk)="handleOk()"
+        [nzOkLoading]="isOkLoading"
+      >
+        <div *nzModalContent id="creaModal">
+          <app-nuovo-cliente [comuni]="comuni" [province]="province"></app-nuovo-cliente>
+        </div>
+      </nz-modal>
+        <nz-page-header-content>
+          <nz-row nzType="flex">
+            <nz-statistic nzTitle="Clienti totali:" [nzValue]="totalElements" ></nz-statistic>
+          </nz-row>
+        </nz-page-header-content>
+      </nz-page-header>
+      <nz-pagination [(nzPageIndex)]="page" [nzTotal]="totalElements/2" nzShowQuickJumper (nzPageIndexChange)="getAllClients(page)">
+      </nz-pagination>
+      <br>
+      <nz-table #sortTable [nzData]="clienti" nzTableLayout="fixed" [nzFrontPagination]="false">
+        <thead>
+          <tr>
+            <th [nzSortFn]="colonnaId.compare" [nzSortPriority]="colonnaId.priority">
+              Id Cliente
+            </th>
+            <th>
+              Nome
+            </th>
+            <th>
+              E-mail
+            </th>
+            <th>
+              Telefono
+            </th>
+            <th [nzSortFn]="colonnaFatturato.compare" [nzSortPriority]="colonnaFatturato.priority">
+              Fatturato annuale
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let data of sortTable.data">
+            <td>{{ data.id }}</td>
+            <td>{{ data.ragioneSociale }}</td>
+            <td>{{ data.email }}</td>
+            <td>{{ data.telefono }}</td>
+            <td>{{ data.fatturatoAnnuale }}</td>
+          </tr>
+        </tbody>
+      </nz-table>
+      <nz-pagination [(nzPageIndex)]="page" [nzTotal]="totalElements/2" nzShowQuickJumper (nzPageIndexChange)="getAllClients(page)">
+      </nz-pagination>
+
+    </nz-content>
+
+  </nz-layout>
+</nz-layout>
