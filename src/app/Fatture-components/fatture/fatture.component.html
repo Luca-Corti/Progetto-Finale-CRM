@@ -6,7 +6,7 @@
         <i nz-icon nzType="user" nzTheme="outline"></i>
         <span>Clienti</span>
       </li>
-      <li nz-menu-item routerLink="/fatture">
+      <li nz-menu-item routerLink="/fatture" routerLinkActive="ant-menu-item-selected">
         <i nz-icon nzType="file-search" nzTheme="outline"></i>
         <span>Fatture</span>
       </li>
@@ -103,7 +103,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let data of sortTable.data">
+          <tr *ngFor="let data of sortTable.data" (click)="dettaglioFattura(data)">
             <td>{{ data.id }}</td>
             <td>{{ data.cliente.ragioneSociale }}</td>
             <td>{{ data.numero }}</td>

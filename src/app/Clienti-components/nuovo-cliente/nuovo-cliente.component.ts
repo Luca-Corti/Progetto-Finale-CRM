@@ -1,7 +1,7 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { en_US, it_IT, NzI18nService } from 'ng-zorro-antd/i18n';
-import { ClientiService } from '../Services/clienti.service';
+import { ClientiService } from '../../Services/clienti.service';
 
 @Component({
   selector: 'app-nuovo-cliente',

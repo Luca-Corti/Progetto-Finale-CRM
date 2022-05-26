@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { Route,RouterModule } from '@angular/router';
+import { Route,Router,RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { HomepageComponent } from './homepage/homepage.component';
@@ -8,6 +8,7 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { UtentiComponent } from './utenti/utenti.component';
 import { NzLayoutModule } from 'ng-zorro-antd/layout';
+import { NzAlertModule } from 'ng-zorro-antd/alert';
 import { NzBreadCrumbModule } from 'ng-zorro-antd/breadcrumb';
 import { NzMenuModule } from 'ng-zorro-antd/menu';
 import { NzAvatarModule } from 'ng-zorro-antd/avatar';
@@ -25,7 +26,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
 import { LandingPageComponent } from './landing-page/landing-page.component';
 import { AuthGuardGuard } from './authentication/auth-guard.guard';
-import { ClientiComponent } from './clienti/clienti.component';
+import { ClientiComponent } from './Clienti-components/clienti/clienti.component';
 import { TokenInterceptor } from './authentication/token.interceptor';
 import { NzPaginationModule } from 'ng-zorro-antd/pagination';
 import { NzModalModule } from 'ng-zorro-antd/modal';
@@ -34,18 +35,25 @@ import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
 import { NzSliderModule } from 'ng-zorro-antd/slider';
+import { NzDescriptionsModule } from 'ng-zorro-antd/descriptions';
+import { NzResultModule } from 'ng-zorro-antd/result';
 import { IconDefinition } from '@ant-design/icons-angular';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 
 // Import icons
-import { UserOutline, FileSearchOutline, TeamOutline, UserAddOutline, LoginOutline} from '@ant-design/icons-angular/icons';
-import { FattureComponent } from './fatture/fatture.component';
+import { UserOutline, FileSearchOutline, TeamOutline, UserAddOutline, LoginOutline, ArrowLeftOutline, LockOutline, MailOutline} from '@ant-design/icons-angular/icons';
+import { FattureComponent } from './Fatture-components/fatture/fatture.component';
 
-const icons: IconDefinition[] = [ UserOutline, TeamOutline, FileSearchOutline, UserAddOutline, LoginOutline ];
+const icons: IconDefinition[] = [ UserOutline, TeamOutline, FileSearchOutline, UserAddOutline, LoginOutline, ArrowLeftOutline, LockOutline, MailOutline];
 
 import { NZ_I18N, it_IT } from 'ng-zorro-antd/i18n';
-import { NuovoClienteComponent } from './nuovo-cliente/nuovo-cliente.component';
-import { NuovaFatturaComponent } from './nuova-fattura/nuova-fattura.component';
+import { NuovoClienteComponent } from './Clienti-components/nuovo-cliente/nuovo-cliente.component';
+import { NuovaFatturaComponent } from './Fatture-components/nuova-fattura/nuova-fattura.component';
+import { DettaglioClienteComponent } from './Clienti-components/dettaglio-cliente/dettaglio-cliente.component';
+import { DettaglioFatturaComponent } from './Fatture-components/dettaglio-fattura/dettaglio-fattura.component';
+import { ModificaClienteComponent } from './Clienti-components/modifica-cliente/modifica-cliente.component';
+import { ModificaFatturaComponent } from './Fatture-components/modifica-fattura/modifica-fattura.component';
+
 
 const customLanguagePack = {
   it_IT,
@@ -77,11 +85,19 @@ const routes:Route[] = [
   },
   {
     path:"clienti",
-    component:ClientiComponent
+    component:ClientiComponent,
+  },
+  {
+    path:"clienti/:id",
+    component:DettaglioClienteComponent,
   },
   {
     path:"fatture",
-    component:FattureComponent
+    component:FattureComponent,
+  },
+  {
+    path:"fatture/:id",
+    component:DettaglioFatturaComponent,
   },
   {
     path:"utenti",
@@ -100,7 +116,12 @@ const routes:Route[] = [
     ClientiComponent,
     FattureComponent,
     NuovoClienteComponent,
-    NuovaFatturaComponent
+    NuovaFatturaComponent,
+    DettaglioClienteComponent,
+    DettaglioFatturaComponent,
+    ModificaClienteComponent,
+    ModificaFatturaComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -111,6 +132,7 @@ const routes:Route[] = [
     HttpClientModule,
     BrowserAnimationsModule,
     NzBreadCrumbModule,
+    NzAlertModule,
     NzMenuModule,
     NzIconModule.forRoot(icons),
     NzButtonModule,
@@ -129,8 +151,9 @@ const routes:Route[] = [
     NzDatePickerModule,
     NzInputNumberModule,
     NzSliderModule,
-    NzToolTipModule
-
+    NzToolTipModule,
+    NzDescriptionsModule,
+    NzResultModule
 
   ],
   providers: [

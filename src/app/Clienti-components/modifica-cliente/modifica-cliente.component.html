@@ -1,0 +1,255 @@
+<form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
+  <!--RAGIONE SOCIALE-->
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="ragioneSociale">Ragione Sociale</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="campo obbligatorio!">
+      <input type="text" nz-input formControlName="ragioneSociale" id="ragioneSociale" />
+    </nz-form-control>
+  </nz-form-item>
+  <!--PARTITA IVA-->
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="partitaIva" nzRequired>
+      <span>Partita IVA</span>
+    </nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="campo obbligatorio!">
+      <input nz-input id="partitaIva" formControlName="partitaIva" />
+    </nz-form-control>
+  </nz-form-item>
+  <!--TIPO AZIENDA-->
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="tipoCliente" nzRequired>Tipo cliente</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="campo obbligatorio!">
+      <nz-select id="tipoCliente" formControlName="tipoCliente" >
+        <nz-option nzValue="SRL" nzLabel="SRL"></nz-option>
+        <nz-option nzValue="SPA" nzLabel="SPA"></nz-option>
+        <nz-option nzValue="SAS" nzLabel="SAS"></nz-option>
+        <nz-option nzValue="PA" nzLabel="PA"></nz-option>
+      </nz-select>
+    </nz-form-control>
+  </nz-form-item>
+  <!--EMAIL-->
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="email">E-mail</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Obbligatorio inserire e-mail valida!">
+      <input type="email" nz-input formControlName="email" id="email" />
+    </nz-form-control>
+  </nz-form-item>
+  <!--PEC-->
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="pec">Pec mail</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Obbligatorio inserire e-mail valida!">
+      <input type="email" nz-input formControlName="pec" id="pec" />
+    </nz-form-control>
+  </nz-form-item>
+  <!--TELEFONO-->
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="telefono" nzRequired>
+      <span>Telefono</span>
+    </nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="campo obbligatorio!">
+      <input nz-input id="telefono" formControlName="telefono" />
+    </nz-form-control>
+  </nz-form-item>
+  <!--NOME CONTATTO-->
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="nomeContatto" nzRequired>
+      <span>Nome Contatto</span>
+    </nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="campo obbligatorio!">
+      <input nz-input id="nomeContatto" formControlName="nomeContatto" />
+    </nz-form-control>
+  </nz-form-item>
+  <!--COGNOME CONTATTO-->
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="cognomeContatto" nzRequired>
+      <span>Cognome Contatto</span>
+    </nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="campo obbligatorio!">
+      <input nz-input id="cognomeContatto" formControlName="cognomeContatto" />
+    </nz-form-control>
+  </nz-form-item>
+  <!--TELEFONO CONTATTO-->
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="telefonoContatto" nzRequired>
+      <span>Telefono Contatto</span>
+    </nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="campo obbligatorio!">
+      <input nz-input id="telefonoContatto" formControlName="telefonoContatto" />
+    </nz-form-control>
+  </nz-form-item>
+  <!--EMAIL CONTATTO-->
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="emailContatto">E-mail Contatto</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Obbligatorio inserire e-mail valida!">
+      <input type="email" nz-input formControlName="emailContatto" id="emailContatto" />
+    </nz-form-control>
+  </nz-form-item>
+  <!--INDIRIZZO SEDE OPERATIVA GRUPPO-->
+  <div formGroupName="indirizzoSedeOperativa">
+    <!--VIA-->
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="via">Via</nz-form-label>
+      <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="campo obbligatorio!">
+        <input nz-input formControlName="via" id="via" />
+      </nz-form-control>
+    </nz-form-item>
+    <!--CIVICO-->
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="civico">Civico</nz-form-label>
+      <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="campo obbligatorio!">
+        <input nz-input formControlName="civico" id="civico" />
+      </nz-form-control>
+    </nz-form-item>
+    <!--CAP-->
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="cap">CAP</nz-form-label>
+      <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="campo obbligatorio!">
+        <input nz-input formControlName="cap" id="cap" />
+      </nz-form-control>
+    </nz-form-item>
+    <!--LOCALITA-->
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="localita">Località</nz-form-label>
+      <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="campo obbligatorio!">
+        <input nz-input formControlName="localita" id="localita" />
+      </nz-form-control>
+    </nz-form-item>
+    <!--COMUNE OPERATIVA GRUPPO-->
+    <div formGroupName="comune">
+      <!--COMUNEOPERATIVA ID-->
+      <nz-form-item>
+        <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="comune" nzRequired>Comune</nz-form-label>
+        <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="campo obbligatorio!">
+          <nz-select id="comune" formControlName="id" nzPlaceHolder="Seleziona un comune"
+            (ngModelChange)="setNomeComune($event)">
+            <nz-option *ngFor="let comune of comuni" [nzValue]="comune.id" [nzLabel]="comune.nome">
+            </nz-option>
+          </nz-select>
+        </nz-form-control>
+      </nz-form-item>
+      <!--COMUNE OPERATIVA NOME HIDDEN-->
+      <nz-form-item>
+        <input type="text" nz-input formControlName="nome" *ngIf="false" />
+      </nz-form-item>
+      <!--PROVINCIA OPERATIVA GRUPPO-->
+      <div formGroupName="provincia">
+        <!--PROVINCIA OPERATIVA ID-->
+        <nz-form-item>
+          <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="provincia" nzRequired>Provincia</nz-form-label>
+          <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="campo obbligatorio!">
+            <nz-select id="provincia" formControlName="id"
+              (ngModelChange)="setNomeProvincia($event)">
+              <nz-option *ngFor="let provincia of province" [nzValue]="provincia.id" [nzLabel]="provincia.nome">
+              </nz-option>
+            </nz-select>
+          </nz-form-control>
+        </nz-form-item>
+        <!--PROVINCIA OPERATIVA NOME-->
+        <nz-form-item>
+          <input type="text" nz-input formControlName="nome" *ngIf="false" />
+        </nz-form-item>
+        <!--PROVINCIA OPERATIVA SIGLA-->
+        <nz-form-item>
+          <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="sigla" nzRequired>Sigla pr</nz-form-label>
+          <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="campo obbligatorio!">
+            <nz-select id="sigla" formControlName="sigla" >
+              <nz-option nzValue="FI" nzLabel="FI"></nz-option>
+              <nz-option nzValue="RO" nzLabel="RO"></nz-option>
+              <nz-option nzValue="NA" nzLabel="NA"></nz-option>
+            </nz-select>
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+    </div>
+  </div>
+  <!--ULTIMO CONTATTO CALENDARIO-->
+  <nz-form-item *ngIf="false">
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="dataUltimoContatto" nzRequired>Ultimo Contatto</nz-form-label>
+    <nz-date-picker formControlName="dataUltimoContatto"></nz-date-picker>
+  </nz-form-item>
+  <!--SEDE LEGALE GRUPPO-->
+  <div formGroupName="indirizzoSedeLegale">
+    <!--SEDE LEGALE VIA-->
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="via">Via</nz-form-label>
+      <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="campo obbligatorio!">
+        <input nz-input formControlName="via" id="via" />
+      </nz-form-control>
+    </nz-form-item>
+    <!--SEDE LEGALE CIVICO-->
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="civico">Civico</nz-form-label>
+      <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="campo obbligatorio!">
+        <input nz-input formControlName="civico" id="civico" />
+      </nz-form-control>
+    </nz-form-item>
+    <!--SEDE LEGALE CAP-->
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="cap">CAP</nz-form-label>
+      <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="campo obbligatorio!">
+        <input nz-input formControlName="cap" id="cap" />
+      </nz-form-control>
+    </nz-form-item>
+    <!--SEDE LEGALE LOCALITA-->
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="localita">Località</nz-form-label>
+      <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="campo obbligatorio!">
+        <input nz-input formControlName="localita" id="localita" />
+      </nz-form-control>
+    </nz-form-item>
+    <!--SEDE LEGALE COMUNE GRUPPO-->
+    <div formGroupName="comune">
+      <!--SEDE LEGALE COMUNE ID-->
+      <nz-form-item>
+        <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="nome" nzRequired>Comune</nz-form-label>
+        <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="campo obbligatorio!">
+          <nz-select id="comune" formControlName="id" nzPlaceHolder="Seleziona un comune"
+            (ngModelChange)="setNomeComuneLegale($event)">
+            <nz-option *ngFor="let comune of comuni" [nzValue]="comune.id" [nzLabel]="comune.nome">
+            </nz-option>
+          </nz-select>
+        </nz-form-control>
+      </nz-form-item>
+      <!--SEDE LEGALE COMUNE NOME-->
+      <nz-form-item>
+        <input type="text" nz-input formControlName="nome" *ngIf="false" />
+      </nz-form-item>
+      <!--SEDE LEGALE PROVINCIA GRUPPO-->
+      <div formGroupName="provincia">
+        <!--SEDE LEGALE PROVINCIA ID-->
+        <nz-form-item>
+          <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="provincia" nzRequired>Provincia</nz-form-label>
+          <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="campo obbligatorio!">
+            <nz-select id="provincia" formControlName="id"
+              (ngModelChange)="setNomeProvinciaLegale($event)">
+              <nz-option *ngFor="let provincia of province" [nzValue]="provincia.id" [nzLabel]="provincia.nome">
+              </nz-option>
+            </nz-select>
+          </nz-form-control>
+        </nz-form-item>
+        <!--SEDE LEGALE PROVINCIA NOME-->
+        <nz-form-item>
+          <input type="text" nz-input formControlName="nome" *ngIf="false" />
+        </nz-form-item>
+        <!--SEDE LEGALE PROVINCIA SIGLA-->
+        <nz-form-item>
+          <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="sigla" nzRequired>Sigla pr</nz-form-label>
+          <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="campo obbligatorio!">
+            <nz-select id="sigla" formControlName="sigla" >
+              <nz-option nzValue="FI" nzLabel="FI"></nz-option>
+              <nz-option nzValue="RO" nzLabel="RO"></nz-option>
+              <nz-option nzValue="NA" nzLabel="NA"></nz-option>
+            </nz-select>
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+    </div>
+  </div>
+  <!--BOTTONE SUBMIT-->
+  <nz-form-item nz-row class="register-area">
+    <nz-form-control [nzSpan]="14" [nzOffset]="6">
+      <button nz-button nzType="primary">Modifica cliente</button>
+    </nz-form-control>
+  </nz-form-item>
+</form>
+

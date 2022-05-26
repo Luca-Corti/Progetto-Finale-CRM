@@ -1,0 +1,53 @@
+<form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
+<ng-container *ngIf="false">
+   <!--DATA-->
+   <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="dataFattura" nzRequired>Data</nz-form-label>
+    <nz-date-picker nzInline formControlName="data"></nz-date-picker>
+  </nz-form-item>
+    <!--NUMERO-->
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="numero">Numero</nz-form-label>
+      <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="campo obbligatorio!">
+        <input type="number" nz-input formControlName="numero" id="numero" />
+      </nz-form-control>
+    </nz-form-item>
+      <!--ANNO-->
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="anno">Anno</nz-form-label>
+          <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="campo obbligatorio!">
+          <nz-slider id="anno"  [nzTooltipPlacement]="'top'" [nzMin]="1970" [nzMax]="2050" formControlName="anno"></nz-slider>
+        </nz-form-control>
+
+    <!--IMPORTO-->
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="importo">Importo</nz-form-label>
+      <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="campo obbligatorio!">
+        <input type="number" nz-input formControlName="importo" id="importo" />
+      </nz-form-control>
+    </nz-form-item>
+</ng-container>
+      <!--STATO-->
+      <div formGroupName="stato">
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="stato" nzRequired>Stato</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="campo obbligatorio!">
+      <nz-select id="stato" formControlName="nome" nzPlaceHolder="Seleziona uno stato fattura"
+      (ngModelChange)="setIdStato($event)">
+        <nz-option nzValue="PAGATA" nzLabel="PAGATA"></nz-option>
+        <nz-option nzValue="NON PAGATA" nzLabel="NON PAGATA"></nz-option>
+      </nz-select>
+    </nz-form-control>
+  </nz-form-item>
+        <!--STATO ID HIDDEN-->
+        <nz-form-item>
+          <input type="number" nz-input formControlName="id" *ngIf="false" />
+        </nz-form-item>
+      </div>
+      <!--SUBMIT-->
+      <nz-form-item nz-row class="register-area">
+        <nz-form-control [nzSpan]="14" [nzOffset]="6">
+          <button nz-button nzType="primary">Modifica Fattura</button>
+        </nz-form-control>
+      </nz-form-item>
+  </form>
+

@@ -10,16 +10,21 @@ import { AuthService } from '../authentication/auth.service';
 })
 export class LoginComponent implements OnInit {
   validateForm!: FormGroup;
+  error:boolean=false;
 
-  async submitForm() {
+  submitForm() {
     if (this.validateForm.valid) {
       console.log('submit', this.validateForm.value);
-      try{
-        await this.authSrv.login(this.validateForm.value).toPromise()
-      }
-      catch(error){console.log(error)}
-      this.router.navigate(['/home'])
-    } else {
+      this.authSrv.login(this.validateForm.value).subscribe(data => {
+        let json= JSON.stringify(data);
+        localStorage.setItem("user", json);
+        this.router.navigate(['/home'])
+      }, error => {
+        console.log(error);
+        this.error=true;
+      })
+    }
+    else {
       Object.values(this.validateForm.controls).forEach(control => {
         if (control.invalid) {
           control.markAsDirty();
@@ -29,7 +34,7 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  constructor(private fb: FormBuilder, private router:Router,private authSrv:AuthService) {}
+  constructor(private fb: FormBuilder, private router: Router, private authSrv: AuthService) { }
 
   ngOnInit(): void {
     this.validateForm = this.fb.group({

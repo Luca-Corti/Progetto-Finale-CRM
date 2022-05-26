@@ -6,7 +6,8 @@ import { FatturaForm } from '../interfaces/fattura-form';
   providedIn: 'root'
 })
 export class FattureService {
-
+  fatturaDettaglio:any
+  statiFatture:any
   constructor(private http:HttpClient) { }
   getAllFatture(page:number){
    return this.http.get(`http://epicode.online/epicodebeservice_v2/api/fatture?page=${page}&size=20&sort=id,ASC`)
@@ -16,6 +17,8 @@ export class FattureService {
   }
   postNewFattura(fattura:FatturaForm){
     return this.http.post('http://epicode.online/epicodebeservice_v2/api/fatture', fattura)
-
+  }
+  putFattura(fattura:FatturaForm, id:number){
+    return this.http.put('http://epicode.online/epicodebeservice_v2/api/fatture/'+id, fattura)
   }
 }

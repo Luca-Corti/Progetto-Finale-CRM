@@ -10,7 +10,7 @@
         <i nz-icon nzType="file-search" nzTheme="outline"></i>
         <span>Fatture</span>
       </li>
-      <li nz-menu-item routerLink="/utenti" routerLinkActive="ant-menu-item-selected">
+      <li nz-menu-item routerLink="/utenti">
         <i nz-icon nzType="team" nzTheme="outline"></i>
         <span>Utenti</span>
       </li>
@@ -27,7 +27,7 @@
         <button nz-button routerLink="/register">SignUp</button>
         <button nz-button nzType="primary" nzDanger>Logout</button>
         <nz-avatar nz-page-header-avatar nzSrc="https://avatars0.githubusercontent.com/u/22736418?s=88&v=4"></nz-avatar>
-        <a nz-dropdown [nzDropdownMenu]="menu" >
+        <a nz-dropdown [nzDropdownMenu]="menu">
           <nz-page-header-title>Gigi Calamaro <i nz-icon nzType="down" style="font-size: 10px;"></i>
           </nz-page-header-title>
           <nz-page-header-tags>
@@ -54,41 +54,50 @@
 
     </nz-header>
     <nz-content>
-      <h1 class="m-3">Utenti</h1>
-      <nz-pagination [(nzPageIndex)]="page" [nzTotal]="totalElements/2" nzShowQuickJumper (nzPageIndexChange)="getAllUsers(page)">
-      </nz-pagination>
-      <br>
-      <nz-table #sortTable [nzData]="utenti" nzTableLayout="fixed" [nzFrontPagination]="false">
-        <thead>
-          <tr>
-            <th >
-              Id Utente
-            </th>
-            <th>
-              Username
-            </th>
-            <th>
-              E-mail
-            </th>
-            <th>
-              Ruolo
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let data of sortTable.data">
-            <td>{{ data.id }}</td>
-            <td>{{ data.username }}</td>
-            <td>{{ data.email }}</td>
-            <td>{{ data.roles.roleName }}</td>
-          </tr>
-        </tbody>
-      </nz-table>
-      <nz-pagination [(nzPageIndex)]="page" [nzTotal]="totalElements/2" nzShowQuickJumper (nzPageIndexChange)="getAllUsers(page)">
-      </nz-pagination>
+<nz-page-header
+class="site-page-header"
+(nzBack)="onBack()"
+nzBackIcon
+nzTitle="Fattura numero: #{{fatturaDettaglio.numero}}"
+>
+<nz-page-header-extra>
+  <button nz-button (click)="showModal()">Modifica Fattura</button>
+  <button nz-button nzType="primary">Cancella Fattura</button>
+</nz-page-header-extra>
+<nz-modal
+nzMaskClosable="false"
+[(nzVisible)]="isVisible"
+nzWidth="60vw"
+nzTitle="Modifica Stato Fattura"
+(nzOnCancel)="handleCancel()"
+(nzOnOk)="handleOk()"
+[nzOkLoading]="isOkLoading"
+>
+<div *nzModalContent id="creaModal">
+  <app-modifica-fattura [fatturaDettaglio]="fatturaDettaglio"></app-modifica-fattura>
+</div>
+</nz-modal>
+</nz-page-header>
+<nz-descriptions
+nzBordered
+[nzSize]="'small'"
+[nzColumn]="{ xxl: 4, xl: 3, lg: 3, md: 3, sm: 2, xs: 1 }"
+>
+<nz-descriptions-item nzTitle="id fattura">{{fatturaDettaglio.id}}</nz-descriptions-item>
+<nz-descriptions-item nzTitle="Data fattura">{{fatturaDettaglio.data}}</nz-descriptions-item>
+<nz-descriptions-item nzTitle="Anno">{{fatturaDettaglio.anno}}</nz-descriptions-item>
+<nz-descriptions-item nzTitle="Importo">{{fatturaDettaglio.importo}}</nz-descriptions-item>
+<nz-descriptions-item nzTitle="Stato">{{fatturaDettaglio.stato.nome}}</nz-descriptions-item>
+<nz-descriptions-item nzTitle=""></nz-descriptions-item>
+<nz-descriptions-item nzTitle="Cliente">
 
-    </nz-content>
+  Ragione Sociale: {{fatturaDettaglio.cliente.ragioneSociale}}
+  <br />
+  Partita IVA: {{fatturaDettaglio.cliente.partitaIva}}
+  <br />
+</nz-descriptions-item>
+</nz-descriptions>
+</nz-content>
 
-  </nz-layout>
 </nz-layout>
-
+</nz-layout>

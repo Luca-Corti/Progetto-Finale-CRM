@@ -1,8 +1,8 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { Cliente } from '../interfaces/cliente';
-import { ClientiService } from '../Services/clienti.service';
-import { FattureService } from '../Services/fatture.service';
+import { Cliente } from '../../interfaces/cliente';
+import { ClientiService } from '../../Services/clienti.service';
+import { FattureService } from '../../Services/fatture.service';
 import { en_US, it_IT, NzI18nService } from 'ng-zorro-antd/i18n';
 
 @Component({
@@ -41,7 +41,8 @@ submitSearch(){
 }
 getClienteById(id:number){
   this.srv.getClienteById(id).subscribe(data=>{
-    this.risultato=data
+    this.risultato= []
+    this.risultato.push(data)
   })
 }
 getClienteByRagioneSociale(query:string){

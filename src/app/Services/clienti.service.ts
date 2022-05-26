@@ -8,7 +8,6 @@ import { ClienteForm } from '../interfaces/cliente-form';
   providedIn: 'root'
 })
 export class ClientiService {
-
   constructor(private http:HttpClient) { }
   getAllClients(page:number){
    return this.http.get(`http://epicode.online/epicodebeservice_v2/api/clienti?page=${page}&size=20&sort=id,ASC`)
@@ -22,6 +21,12 @@ export class ClientiService {
   postNewClient(formData:ClienteForm){
     return this.http.post("http://epicode.online/epicodebeservice_v2/api/clienti", formData)
   }
+  putCliente(formData:Cliente, id:number){
+    return this.http.put("http://epicode.online/epicodebeservice_v2/api/clienti/"+id , formData)
+  }
+  deleteCliente(id:number){
+    return this.http.delete("http://epicode.online/epicodebeservice_v2/api/clienti/"+id)
+  }
   getComuni(){
     return this.http.get("http://epicode.online/epicodebeservice_v2/api/comuni?page=0&size=20&sort=id,ASC")
   }
@@ -29,5 +34,8 @@ export class ClientiService {
     return this.http.get("http://epicode.online/epicodebeservice_v2/api/province?page=0&size=20&sort=id,ASC")
   }
 
+ clienteDettaglio = { }
+ province:any
+ comuni:any
 
 }

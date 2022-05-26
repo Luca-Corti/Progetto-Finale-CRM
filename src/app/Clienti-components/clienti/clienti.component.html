@@ -2,7 +2,7 @@
   <nz-sider nzCollapsible nzBreakpoint="lg" [nzCollapsedWidth]="0">
     <div class="logo" routerLink="/home"></div>
     <ul nz-menu nzTheme="dark" nzMode="inline">
-      <li nz-menu-item routerLink="/clienti">
+      <li nz-menu-item routerLink="/clienti" routerLinkActive="ant-menu-item-selected">
         <i nz-icon nzType="user" nzTheme="outline"></i>
         <span>Clienti</span>
       </li>
@@ -54,6 +54,7 @@
 
     </nz-header>
     <nz-content>
+
       <nz-page-header>
         <nz-page-header-title>Clienti</nz-page-header-title>
         <nz-page-header-extra>
@@ -104,7 +105,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let data of sortTable.data">
+          <tr *ngFor="let data of sortTable.data" (click)="dettaglioCliente(data)" >
             <td>{{ data.id }}</td>
             <td>{{ data.ragioneSociale }}</td>
             <td>{{ data.email }}</td>

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Fattura } from '../interfaces/fattura';
-import { FattureService } from '../Services/fatture.service';
+import { Router } from '@angular/router';
+import { Fattura } from '../../interfaces/fattura';
+import { FattureService } from '../../Services/fatture.service';
 
 @Component({
   selector: 'app-fatture',
@@ -33,7 +34,7 @@ colonnaImporto =
                                           else{ return 1}},
     priority: 3
   };
-  constructor(private srv:FattureService) { }
+  constructor(private fatSrv:FattureService, private router:Router) { }
   log(){
     console.log(this.dati);
     console.log(this.fatture)
@@ -66,17 +67,25 @@ colonnaImporto =
   handleCancel(): void {
     this.isVisible = false;
   }
+  fatturaDettaglio:any
+  dettaglioFattura(dati:any):void {
+    this.fatturaDettaglio= dati
+    this.fatSrv.fatturaDettaglio=this.fatturaDettaglio
+    console.log(this.fatSrv.fatturaDettaglio)
+    this.router.navigate(['/fatture', dati.id])
+  }
   getAllFatture(page:number){
-    this.srv.getAllFatture(page - 1).subscribe((data)=>{
+    this.fatSrv.getAllFatture(page - 1).subscribe((data)=>{
       this.dati = data
       this.totalElements = this.dati.totalElements
       this.fatture = this.dati.content
     })
   }
   getStatiFattura(){
-    this.srv.getStatiFattura().subscribe((data)=>{
+    this.fatSrv.getStatiFattura().subscribe((data)=>{
       this.stati=data
       this.stati=this.stati.content
+      this.fatSrv.statiFatture = this.stati
     })
   }
   ngOnInit(): void {

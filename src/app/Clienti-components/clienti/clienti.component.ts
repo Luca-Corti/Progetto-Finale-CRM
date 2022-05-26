@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Cliente } from '../interfaces/cliente';
-import { ClientiService } from '../Services/clienti.service';
+import { Router } from '@angular/router';
+import { Cliente } from '../../interfaces/cliente';
+import { ClientiService } from '../../Services/clienti.service';
 
 @Component({
   selector: 'app-clienti',
@@ -31,7 +32,7 @@ colonnaFatturato =
     priority: 4
   };
 
-  constructor(private srv:ClientiService) { }
+  constructor(private srv:ClientiService, private router:Router) { }
   getAllClients(page:number){
     this.srv.getAllClients(page - 1).subscribe((data)=>{
       this.dati = data
@@ -71,6 +72,15 @@ colonnaFatturato =
   showModal(): void {
     this.isVisible = true;
   }
+  clienteDettaglio!:any
+  dettaglioCliente(dati:any):void {
+    this.clienteDettaglio= dati
+    this.srv.clienteDettaglio=this.clienteDettaglio
+    this.srv.comuni = this.comuni
+    this.srv.province= this.province
+    console.log(this.srv.clienteDettaglio)
+    this.router.navigate(['/clienti', dati.id])
+  }
 
   handleOk(): void {
     this.isOkLoading = true;
@@ -87,6 +97,7 @@ colonnaFatturato =
     this.getAllClients(this.page -1)
     this.getAllComuni()
     this.getAllProvince()
+
   }
 
 }
