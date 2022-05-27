@@ -53,6 +53,7 @@ import { DettaglioClienteComponent } from './Clienti-components/dettaglio-client
 import { DettaglioFatturaComponent } from './Fatture-components/dettaglio-fattura/dettaglio-fattura.component';
 import { ModificaClienteComponent } from './Clienti-components/modifica-cliente/modifica-cliente.component';
 import { ModificaFatturaComponent } from './Fatture-components/modifica-fattura/modifica-fattura.component';
+import { FatturaDaClientiComponent } from './Fatture-components/fattura-da-clienti/fattura-da-clienti.component';
 
 
 const customLanguagePack = {
@@ -121,6 +122,7 @@ const routes:Route[] = [
     DettaglioFatturaComponent,
     ModificaClienteComponent,
     ModificaFatturaComponent,
+    FatturaDaClientiComponent,
 
   ],
   imports: [

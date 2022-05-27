@@ -9,33 +9,33 @@ import { ClienteForm } from '../interfaces/cliente-form';
 })
 export class ClientiService {
   constructor(private http:HttpClient) { }
+  clienteDettaglio = { }
+  province:any
+  comuni:any
+
   getAllClients(page:number){
-   return this.http.get(`http://epicode.online/epicodebeservice_v2/api/clienti?page=${page}&size=20&sort=id,ASC`)
+   return this.http.get(`${environment.serverAddress}/api/clienti?page=${page}&size=20&sort=id,ASC`)
   }
   getClienteById(id:number){
-    return this.http.get("http://epicode.online/epicodebeservice_v2/api/clienti/"+id)
+    return this.http.get(`${environment.serverAddress}/api/clienti/${id}`)
   }
   getClienteByRS(query:string){
-    return this.http.get("http://epicode.online/epicodebeservice_v2/api/clienti/ragionesociale?nome="+query)
+    return this.http.get(`${environment.serverAddress}/api/clienti/ragionesociale?nome=${query}`)
   }
   postNewClient(formData:ClienteForm){
-    return this.http.post("http://epicode.online/epicodebeservice_v2/api/clienti", formData)
+    return this.http.post(`${environment.serverAddress}/api/clienti`, formData)
   }
   putCliente(formData:Cliente, id:number){
-    return this.http.put("http://epicode.online/epicodebeservice_v2/api/clienti/"+id , formData)
+    return this.http.put(`${environment.serverAddress}/api/clienti/${id}`, formData)
   }
   deleteCliente(id:number){
-    return this.http.delete("http://epicode.online/epicodebeservice_v2/api/clienti/"+id)
+    return this.http.delete(`${environment.serverAddress}/api/clienti/${id}`)
   }
   getComuni(){
-    return this.http.get("http://epicode.online/epicodebeservice_v2/api/comuni?page=0&size=20&sort=id,ASC")
+    return this.http.get(`${environment.serverAddress}/api/comuni?page=0&size=20&sort=id,ASC`)
   }
   getProvince(){
-    return this.http.get("http://epicode.online/epicodebeservice_v2/api/province?page=0&size=20&sort=id,ASC")
+    return this.http.get(`${environment.serverAddress}/api/province?page=0&size=20&sort=id,ASC`)
   }
-
- clienteDettaglio = { }
- province:any
- comuni:any
 
 }

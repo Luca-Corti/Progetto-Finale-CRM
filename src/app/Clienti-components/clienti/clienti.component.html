@@ -75,6 +75,7 @@
           <app-nuovo-cliente [comuni]="comuni" [province]="province"></app-nuovo-cliente>
         </div>
       </nz-modal>
+
         <nz-page-header-content>
           <nz-row nzType="flex">
             <nz-statistic nzTitle="Clienti totali:" [nzValue]="totalElements" ></nz-statistic>
@@ -110,7 +111,7 @@
             <td>{{ data.ragioneSociale }}</td>
             <td>{{ data.email }}</td>
             <td>{{ data.telefono }}</td>
-            <td>{{ data.fatturatoAnnuale }}</td>
+            <td>{{data.fatturatoAnnuale}}</td>
           </tr>
         </tbody>
       </nz-table>

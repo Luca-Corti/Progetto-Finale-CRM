@@ -2,6 +2,7 @@
 import { Component, OnDestroy, OnInit, } from '@angular/core';
 import { Router } from '@angular/router';
 import { NzModalService } from 'ng-zorro-antd/modal';
+import { FattureService } from 'src/app/Services/fatture.service';
 import { ClientiService } from '../../Services/clienti.service';
 
 @Component({
@@ -12,7 +13,7 @@ import { ClientiService } from '../../Services/clienti.service';
 export class DettaglioClienteComponent implements OnInit, OnDestroy {
   clienteDettaglio:any=this.srv.clienteDettaglio
 
-  constructor(private srv:ClientiService, private router:Router, private modal: NzModalService) {console.log(this.clienteDettaglio) }
+  constructor(private srv:ClientiService,private fatSrv:FattureService, private router:Router, private modal: NzModalService) { }
   onBack(){
     this.router.navigate(['/clienti'])
   }
@@ -40,9 +41,9 @@ export class DettaglioClienteComponent implements OnInit, OnDestroy {
       nzOkText: 'Yes',
       nzOkType: 'primary',
       nzOkDanger: true,
-      nzOnOk: () => this.deleteCliente(this.clienteDettaglio.id),
+      nzOnOk: () => {this.deleteCliente(this.clienteDettaglio.id);this.cancelled=true},
       nzCancelText: 'No',
-      nzOnCancel: () => this.cancelled=true
+      nzOnCancel: () => {}
     });
   }
   handleOk(): void {
@@ -57,10 +58,35 @@ export class DettaglioClienteComponent implements OnInit, OnDestroy {
   handleCancel(): void {
     this.isVisible = false;
   }
+  //MODALE NUOVA FATTURA
+  fatVisible = false
+  nuovaFattura(){
+    this.fatVisible = true
+  }
+  handleOkFat(): void {
+    this.isOkLoading = true;
+    setTimeout(() => {
+      this.fatVisible = false;
+      this.isOkLoading = false;
+    }, 1000);
+  }
+  handleCancelFat(): void {
+    this.fatVisible = false;
+  }
   deleteCliente(id:number){
     this.srv.deleteCliente(id).subscribe()
   }
+  stati:any
+
+  getStatiFattura(){
+    this.fatSrv.getStatiFattura().subscribe((data)=>{
+      this.stati=data
+      this.stati=this.stati.content
+      this.fatSrv.statiFatture = this.stati
+    })
+  }
   ngOnInit(): void {
+    this.getStatiFattura()
   }
   ngOnDestroy(): void {
     this.srv.clienteDettaglio = { }

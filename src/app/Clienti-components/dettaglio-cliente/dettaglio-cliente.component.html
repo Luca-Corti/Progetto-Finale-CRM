@@ -63,7 +63,7 @@ nzTitle={{clienteDettaglio.ragioneSociale}}
 >
 <nz-page-header-extra>
   <button nz-button (click)="showModal()">Modifica cliente</button>
-  <button nz-button nzType="primary">Aggiungi nuova fattura</button>
+  <button nz-button nzType="primary" (click)="nuovaFattura()">Aggiungi nuova fattura</button>
   <button nz-button nzType="primary" nzDanger (click)="showDeleteConfirm()">Cancella cliente</button>
 </nz-page-header-extra>
 <nz-modal
@@ -76,9 +76,22 @@ nzTitle="Modifica Cliente"
 [nzOkLoading]="isOkLoading"
 >
 <div *nzModalContent id="creaModal">
-  <app-modifica-cliente [clienteDettaglio]="clienteDettaglio"></app-modifica-cliente>
+  <app-modifica-cliente [clienteDettaglio]="clienteDettaglio" ></app-modifica-cliente>
 </div>
 </nz-modal>
+<nz-modal
+      nzMaskClosable="false"
+      [(nzVisible)]="fatVisible"
+      nzWidth="60vw"
+      nzTitle="Crea Nuova Fattura"
+      (nzOnCancel)="handleCancelFat()"
+      (nzOnOk)="handleOkFat()"
+      [nzOkLoading]="isOkLoading"
+    >
+      <div *nzModalContent id="creaModal">
+        <app-fattura-da-clienti [clienteDettaglio]="clienteDettaglio" [stati]="stati"></app-fattura-da-clienti>
+      </div>
+    </nz-modal>
 </nz-page-header>
 <nz-descriptions
 nzTitle={{clienteDettaglio.ragioneSociale}}

@@ -17,7 +17,7 @@ comuni!:any
 province!:any
 page:number=1;
 totalElements!:number
-
+// COLONNE CHE ORDINANO I DATI DELLA PAGINA, IN BASE A ID E FATTURATO
 colonnaId =
   {
     title: 'Id cliente',
@@ -66,12 +66,7 @@ colonnaFatturato =
     else if(value=='ND'){this.status.name='Non disponibile';this.status.color='gold'}
     else if(value=='Invisibile'){this.status.name='Invisibile';this.status.color=''}
   }
-  isVisible = false;
-  isOkLoading = false;
-
-  showModal(): void {
-    this.isVisible = true;
-  }
+//VARIABILE E FUNZIONE CHE MI MANDA NEL DETTAGLIO CLIENTE
   clienteDettaglio!:any
   dettaglioCliente(dati:any):void {
     this.clienteDettaglio= dati
@@ -81,7 +76,13 @@ colonnaFatturato =
     console.log(this.srv.clienteDettaglio)
     this.router.navigate(['/clienti', dati.id])
   }
-
+  //VARIABILI PER MODALS
+  isVisible = false;
+  isOkLoading = false;
+  //MODALE NUOVO CLIENTE
+  showModal(): void {
+    this.isVisible = true;
+  }
   handleOk(): void {
     this.isOkLoading = true;
     setTimeout(() => {
@@ -89,10 +90,12 @@ colonnaFatturato =
       this.isOkLoading = false;
     }, 1000);
   }
-
   handleCancel(): void {
     this.isVisible = false;
   }
+
+
+  //ON INIT
   ngOnInit(): void {
     this.getAllClients(this.page -1)
     this.getAllComuni()
