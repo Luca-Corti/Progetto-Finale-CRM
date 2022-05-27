@@ -5,26 +5,27 @@
   background-size: cover;
   margin: 16px;
 }
-
 nz-header {
   background: rgba(255, 255, 255, 0.2);
   padding: 0 5%;
   display: flex;
-  justify-content: end;
+  justify-content: flex-end;
   align-content: center;
 }
-
 nz-content {
   margin: 24px 16px ;
 }
-
 .inner-content {
   padding: 24px;
   background: #fff;
   min-height: 100%;
 }
-
-
 .layout{
-  height:100%;
+  height:150vh;
+}
+.border {
+  border:1px solid white;
+  border-radius: 10px;
+  padding:5px 10%;
+  margin-bottom: 5px;
 }

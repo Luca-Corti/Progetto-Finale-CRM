@@ -14,7 +14,12 @@ import { ClientiService } from '../../Services/clienti.service';
 export class DettaglioClienteComponent implements OnInit, OnDestroy {
   clienteDettaglio:any=this.srv.clienteDettaglio
   nomeAccount=this.authSrv.user.username
-  constructor(private srv:ClientiService,private fatSrv:FattureService, private router:Router, private modal: NzModalService, private authSrv:AuthService) { }
+  constructor(private srv:ClientiService,private fatSrv:FattureService, private router:Router, private modal: NzModalService, private authSrv:AuthService) {
+    if(this.clienteDettaglio==null){
+      this.errors=true;
+    }
+   }
+   errors:boolean=false
   onBack(){
     this.router.navigate(['/clienti'])
   }
@@ -85,6 +90,9 @@ export class DettaglioClienteComponent implements OnInit, OnDestroy {
       this.stati=this.stati.content
       this.fatSrv.statiFatture = this.stati
     })
+  }
+  logout(){
+    this.authSrv.logout()
   }
   ngOnInit(): void {
     this.getStatiFattura()

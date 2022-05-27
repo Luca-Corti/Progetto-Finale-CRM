@@ -20,7 +20,9 @@ nomeAccount=this.authSrv.user.username
     else if(value=='ND'){this.status.name='Non disponibile';this.status.color='gold'}
     else if(value=='Invisibile'){this.status.name='Invisibile';this.status.color=''}
   }
-
+  logout(){
+    this.authSrv.logout()
+  }
   ngOnInit(): void {
   }
 

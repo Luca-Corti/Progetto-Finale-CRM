@@ -37,9 +37,8 @@ colonnaImporto =
   };
   nomeAccount=this.authSrv.user.username
   constructor(private fatSrv:FattureService, private router:Router,private authSrv:AuthService) { }
-  log(){
-    console.log(this.dati);
-    console.log(this.fatture)
+  logout(){
+    this.authSrv.logout()
   }
   status={
     name:'Online',

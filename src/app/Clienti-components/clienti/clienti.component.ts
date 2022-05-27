@@ -10,71 +10,119 @@ import { ClientiService } from '../../Services/clienti.service';
   styleUrls: ['./clienti.component.scss']
 })
 export class ClientiComponent implements OnInit {
-  nomeAccount=this.authSrv.user.username
-dati:any;
-datiComune:any
-datiProvincia:any
-clienti!:Cliente[]
-comuni!:any
-province!:any
-page:number=1;
-totalElements!:number
-// COLONNE CHE ORDINANO I DATI DELLA PAGINA, IN BASE A ID E FATTURATO
-colonnaId =
-  {
-    title: 'Id cliente',
-    compare: (a:any, b: any) => a.id - b.id,
-    priority: 1
-  };
-colonnaFatturato =
-  {
-    title: 'Fatturato annuale',
-    compare: (a: any, b: any) =>{ if(a.fatturatoAnnuale && b.fatturatoAnnuale){return a.fatturatoAnnuale - b.fatturatoAnnuale}
-                                          else{ return 1}},
-    priority: 4
-  };
+  nomeAccount = this.authSrv.user.username
+  dati: any;
+  datiComune: any
+  datiProvincia: any
+  clienti!: Cliente[]
+  comuni!: any
+  province!: any
+  page: number = 1;
+  totalElements!: number
+  // COLONNE CHE ORDINANO I DATI DELLA PAGINA, IN BASE A ID E FATTURATO
+  colonnaId =
+    {
+      title: 'Id cliente',
+      compare: (a: any, b: any) => a.id - b.id,
+      priority: 1
+    };
+  colonnaFatturato =
+    {
+      title: 'Fatturato annuale',
+      compare: (a: any, b: any) => {
+        if (a.fatturatoAnnuale && b.fatturatoAnnuale) { return a.fatturatoAnnuale - b.fatturatoAnnuale }
+        else { return 1 }
+      },
+      priority: 4
+    };
 
-  constructor(private srv:ClientiService, private router:Router, private authSrv:AuthService) { }
-  getAllClients(page:number){
-    this.srv.getAllClients(page - 1).subscribe((data)=>{
+  constructor(private srv: ClientiService, private router: Router, private authSrv: AuthService) { }
+  getAllClients(page: number) {
+    this.srv.getAllClients(page - 1).subscribe((data) => {
       this.dati = data
       this.totalElements = this.dati.totalElements
       this.clienti = this.dati.content
     })
   }
-  getAllComuni(){
-    this.srv.getComuni().subscribe((data)=>{
+  getAllComuni() {
+    this.srv.getComuni().subscribe((data) => {
       this.datiComune = data
       this.comuni = this.datiComune.content
     })
   }
-  getAllProvince(){
-    this.srv.getProvince().subscribe((data)=>{
+  getAllProvince() {
+    this.srv.getProvince().subscribe((data) => {
       this.datiProvincia = data
       this.province = this.datiProvincia.content
     })
   }
-  log(){
-    console.log(this.dati);
-    console.log(this.clienti)
+  logout() {
+    this.authSrv.logout()
   }
-  status={
-    name:'Online',
-    color:'green'
+  status = {
+    name: 'Online',
+    color: 'green'
   }
-  changeStatus(value:string) {
-    if(value=='Online'){this.status.name='Online';this.status.color='green'}
-    else if(value=='Offline'){this.status.name='Offline';this.status.color='red'}
-    else if(value=='ND'){this.status.name='Non disponibile';this.status.color='gold'}
-    else if(value=='Invisibile'){this.status.name='Invisibile';this.status.color=''}
+  changeStatus(value: string) {
+    if (value == 'Online') { this.status.name = 'Online'; this.status.color = 'green' }
+    else if (value == 'Offline') { this.status.name = 'Offline'; this.status.color = 'red' }
+    else if (value == 'ND') { this.status.name = 'Non disponibile'; this.status.color = 'gold' }
+    else if (value == 'Invisibile') { this.status.name = 'Invisibile'; this.status.color = '' }
   }
-//VARIABILE E FUNZIONE CHE MI MANDA NEL DETTAGLIO CLIENTE
-  clienteDettaglio!:any
-  dettaglioCliente(dati:any):void {
-    this.clienteDettaglio= dati
-    this.srv.clienteDettaglio=this.clienteDettaglio
+  //VARIABILE E FUNZIONE CHE MI MANDA NEL DETTAGLIO CLIENTE
+  clienteDettaglio!: any
+  dettaglioCliente(dati: any): void {
+    //BUG FIX DOVUTO A MANCANZA DATI NEL SERVER
+    this.clienteDettaglio = dati
+    if (this.clienteDettaglio.indirizzoSedeLegale == null) {
+      this.clienteDettaglio.indirizzoSedeLegale = {
+        id: "",
+        via: "",
+        civico: "",
+        cap: "",
+        localita: "",
+        comune: {
+          id: "",
+          nome: "",
+          provincia: {
+            id: "",
+            nome: "",
+            sigla: ""
+          }
+        }
+      }
+    }
+    if (this.clienteDettaglio.indirizzoSedeOperativa == null) {
+      this.clienteDettaglio.indirizzoSedeOperativa = {
+        id: "",
+        via: "",
+        civico: "",
+        cap: "",
+        localita: "",
+        comune: {
+          id: "",
+          nome: "",
+          provincia: {
+            id: "",
+            nome: "",
+            sigla: ""
+          }
+        }
+      }
+    }
+    if (this.clienteDettaglio.fatturatoAnnuale == null) {
+      this.clienteDettaglio.fatturatoAnnuale = ""
+    }
+    if (this.clienteDettaglio.dataInserimento == null) {
+      this.clienteDettaglio.dataInserimento = ""
+    }
+    if (this.clienteDettaglio.dataUltimoContatto == null) {
+      this.clienteDettaglio.dataUltimoContatto = ""
+    }
+    //FINE BUGFIX
+    this.srv.clienteDettaglio = this.clienteDettaglio
     this.srv.comuni = this.comuni
-    this.srv.province= this.province
+    this.srv.province = this.province
     console.log(this.srv.clienteDettaglio)
     this.router.navigate(['/clienti', dati.id])
   }
@@ -96,7 +144,7 @@ colonnaFatturato =
     this.isVisible = false;
   }
   //MODALE CERCA CLIENTE
-  cercaVisible=false
+  cercaVisible = false
   cercaModal(): void {
     this.cercaVisible = true;
   }
@@ -109,7 +157,7 @@ colonnaFatturato =
 
   //ON INIT
   ngOnInit(): void {
-    this.getAllClients(this.page -1)
+    this.getAllClients(this.page - 1)
     this.getAllComuni()
     this.getAllProvince()
 

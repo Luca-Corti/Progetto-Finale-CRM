@@ -23,9 +23,8 @@ export class UtentiComponent implements OnInit {
       this.utenti = this.dati.content
     })
   }
-  log(){
-    console.log(this.dati);
-    console.log(this.utenti)
+  logout(){
+    this.authSrv.logout()
   }
   status={
     name:'Online',

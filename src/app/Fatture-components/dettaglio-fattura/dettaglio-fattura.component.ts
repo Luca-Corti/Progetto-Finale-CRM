@@ -44,6 +44,9 @@ export class DettaglioFatturaComponent implements OnInit {
   handleCancel(): void {
     this.isVisible = false;
   }
+  logout(){
+    this.authSrv.logout()
+  }
   ngOnInit(): void {
   }
 

@@ -25,7 +25,7 @@
 
       <nz-page-header-extra>
         <button nz-button routerLink="/register">SignUp</button>
-        <button nz-button nzType="primary" nzDanger>Logout</button>
+        <button nz-button nzType="primary" nzDanger (click)="logout()">Logout</button>
         <nz-avatar nz-page-header-avatar nzSrc="https://avatars0.githubusercontent.com/u/22736418?s=88&v=4"></nz-avatar>
         <a nz-dropdown [nzDropdownMenu]="menu" >
           <nz-page-header-title>{{nomeAccount}}<i nz-icon nzType="down" style="font-size: 10px;"></i>
