@@ -6,6 +6,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AuthGuardGuard } from './authentication/auth-guard.guard';
+import { LoginGuardGuard } from './authentication/login-guard.guard';
 import { TokenInterceptor } from './authentication/token.interceptor';
 // Import icons
 import { IconDefinition } from '@ant-design/icons-angular';
@@ -44,7 +45,8 @@ const customLanguagePack = {
 const routes:Route[] = [
   {
     path:"",
-    component:LandingPageComponent
+    component:LandingPageComponent,
+    canActivate:[LoginGuardGuard]
   },
   {
     path:"home",
@@ -53,7 +55,8 @@ const routes:Route[] = [
   },
   {
     path:"login",
-    component:LoginComponent
+    component:LoginComponent,
+    canActivate:[LoginGuardGuard]
   },
   {
     path:"register",
