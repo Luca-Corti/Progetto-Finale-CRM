@@ -1,0 +1,59 @@
+<form nz-form [formGroup]="searchForm" (ngSubmit)="submitSearch()">
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="ricerca" nzRequired>Cerca per</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="campo obbligatorio!">
+      <nz-select id="ricerca" formControlName="ricerca" nzPlaceHolder="Seleziona un metodo di ricerca"
+        (ngModelChange)="changeSearch($event)">
+        <nz-option nzValue="byId" nzLabel="Per id cliente"></nz-option>
+        <nz-option nzValue="byRagioneSociale" nzLabel="Per ragione sociale"></nz-option>
+      </nz-select>
+    </nz-form-control>
+  </nz-form-item>
+  <ng-container *ngIf="byId">
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="byid">Inserisci id</nz-form-label>
+      <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="campo obbligatorio!">
+        <input nz-input formControlName="value" id="byid" />
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item nz-row class="register-area">
+      <nz-form-control [nzSpan]="14" [nzOffset]="6">
+        <button nz-button nzType="primary">Cerca cliente per Id</button>
+      </nz-form-control>
+    </nz-form-item>
+  </ng-container>
+  <ng-container *ngIf="byRagioneSociale">
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="byragione">Cerca ragione sociale</nz-form-label>
+      <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="campo obbligatorio!">
+        <input nz-input formControlName="value" id="byragione" />
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item nz-row class="register-area">
+      <nz-form-control [nzSpan]="14" [nzOffset]="6">
+        <button nz-button nzType="primary">Cerca cliente per ragione sociale</button>
+      </nz-form-control>
+    </nz-form-item>
+  </ng-container>
+  </form>
+  <!--MOSTRO RISULTATO RICERCA-->
+  <nz-table #basicTable *ngIf="risultato" [nzData]="risultato">
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>RagioneSociale</th>
+        <th>Partita IVA</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let data of basicTable.data">
+        <td>{{ data.id }}</td>
+        <td>{{ data.ragioneSociale }}</td>
+        <td>{{ data.partitaIva }}</td>
+        <td>
+          <button nz-button nzType="primary" (click)="dettaglioCliente(data)">Dettaglio</button>
+        </td>
+      </tr>
+    </tbody>
+  </nz-table>

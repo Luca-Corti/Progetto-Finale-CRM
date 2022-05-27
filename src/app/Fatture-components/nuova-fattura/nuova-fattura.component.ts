@@ -51,10 +51,7 @@ getClienteByRagioneSociale(query:string){
     this.risultato=this.risultato.content
   })
 }
-log(){
-  console.log(this.risultato);
-  console.log(this.cliente)
-}
+
 select(cliente:Cliente){
   this.cliente = cliente;
   this.fineRicerca=true

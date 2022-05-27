@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, catchError, tap } from 'rxjs';
+import { Router } from '@angular/router';
+import { BehaviorSubject, catchError, map, tap } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { AuthData } from '../interfaces/auth-data';
 import { LoginData } from '../interfaces/login-data';
@@ -11,19 +12,32 @@ import { SignupData } from '../interfaces/signup-data';
 })
 export class AuthService {
 
-  constructor(private http:HttpClient) { }
+  constructor(private http: HttpClient, private router:Router) { }
 
-  private authSubject = new BehaviorSubject<null| AuthData>(null)
+  private authSubject = new BehaviorSubject<null | AuthData>(null)
   user$ = this.authSubject.asObservable()
+  isLoggedIn = this.user$.pipe(map(user => !!user))
 
-
-  signup(formData:SignupData){
+  signup(formData: SignupData) {
     return this.http.post(environment.serverAddress + "/api/auth/signup", formData)
   }
-  login(formData:LoginData){
+  login(formData: LoginData) {
     return this.http.post<AuthData>(environment.serverAddress + "/api/auth/login", formData).pipe(tap(
-      (data)=>{this.authSubject.next(data)})
-
-      );
+      (data) => { this.authSubject.next(data) })
+    );
+  }
+  logout(){
+    this.authSubject.next(null);
+    localStorage.removeItem('user')
+    this.router.navigate(['/'])
+  }
+  user:any
+  guard():boolean{
+   let userJson = localStorage.getItem('user');
+   if(userJson){
+    this.user = JSON.parse(userJson)
+    return true
+   }
+   else{return false}
   }
 }

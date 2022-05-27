@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthGuardGuard } from '../authentication/auth-guard.guard';
+import { AuthService } from '../authentication/auth.service';
 
 @Component({
   selector: 'app-homepage',
@@ -6,8 +8,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./homepage.component.scss']
 })
 export class HomepageComponent implements OnInit {
-
-  constructor() { }
+nomeAccount=this.authSrv.user.username
+  constructor(private authSrv:AuthService) { }
   status={
     name:'Online',
     color:'green'

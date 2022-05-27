@@ -2,6 +2,7 @@
 import { Component, OnDestroy, OnInit, } from '@angular/core';
 import { Router } from '@angular/router';
 import { NzModalService } from 'ng-zorro-antd/modal';
+import { AuthService } from 'src/app/authentication/auth.service';
 import { FattureService } from 'src/app/Services/fatture.service';
 import { ClientiService } from '../../Services/clienti.service';
 
@@ -12,8 +13,8 @@ import { ClientiService } from '../../Services/clienti.service';
 })
 export class DettaglioClienteComponent implements OnInit, OnDestroy {
   clienteDettaglio:any=this.srv.clienteDettaglio
-
-  constructor(private srv:ClientiService,private fatSrv:FattureService, private router:Router, private modal: NzModalService) { }
+  nomeAccount=this.authSrv.user.username
+  constructor(private srv:ClientiService,private fatSrv:FattureService, private router:Router, private modal: NzModalService, private authSrv:AuthService) { }
   onBack(){
     this.router.navigate(['/clienti'])
   }

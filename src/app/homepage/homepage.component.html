@@ -28,7 +28,7 @@
         <button nz-button nzType="primary" nzDanger>Logout</button>
         <nz-avatar nz-page-header-avatar nzSrc="https://avatars0.githubusercontent.com/u/22736418?s=88&v=4"></nz-avatar>
         <a nz-dropdown [nzDropdownMenu]="menu" >
-          <nz-page-header-title>Gigi Calamaro <i nz-icon nzType="down" style="font-size: 10px;"></i>
+          <nz-page-header-title>{{nomeAccount}}<i nz-icon nzType="down" style="font-size: 10px;"></i>
           </nz-page-header-title>
           <nz-page-header-tags>
             <nz-tag [nzColor]="status.color">{{status.name}}</nz-tag>
@@ -54,7 +54,36 @@
 
     </nz-header>
     <nz-content>
-      <div class="inner-content">Content</div>
+      <div >
+        <h2>Funzionamento app:</h2>
+        <p>Landing page iniziale se non si è loggati con link alle pagine signUp e Login</p>
+        <p>pagine signup e login tra loro linkate, al login salvo l'utente nel localstorage e ne consento la permanenza fino al logout</p>
+        <p>Una volta loggato ho accesso a:</p>
+        <p>3 pagine principali, clienti fatture e utenti protette da guard su login+ 1 pagina per admin protetta ulteriormente da role=admin</p>
+         <hr>
+        <p>Nella pagina clienti abbiamo la lista di tutti i clienti con paginazione lato server e qui possiamo:</p>
+        <p>1)Visitare la pagina dettaglio (che si passa i dati dalla pagina padre risparmiando chiamate al server)</p>
+        <p>2)Creare un nuovo cliente</p>
+        <p>3)Cercare un cliente per id o ragione sociale</p>
+        <p>Nella pagina dettaglio cliente possiamo:</p>
+        <p>1)Modificare il cliente</p>
+        <p>2)Cancellare il cliente</p>
+        <p>3)Aggiungere una nuova fattura a lui correlata</p>
+          <hr>
+        <p>Nella pagina Fatture abbiamo la lista di tutte le fatture con paginazione lato server e qui possiamo:</p>
+        <p>1)Vedere il dettaglio fattura(sempre passaggio dati padre-figlio)</p>
+        <p>2)Creare una nuova fattura mediante un modale che presenta una ricerca del cliente a cui aggiungere la medesima</p>
+        <p>3)Cercare una fattura per id, id cliente, Stato fattura ed anno tramite un modale.</p>
+        <p>il risultato della ricerca è paginato lato client, risparmiando molte chiamate al server</p>
+        <p>Nel dettaglio fattura possiamo modificare lo stato o cancellare la fattura</p>
+        <hr>
+        <p>Nella pagina utenti abbiamo la lista utenti paginata lato server </p>
+        <hr>
+        <p>Nella pagina Admin un admin potrebbe modificare o cancellare un utente (azioni non contemplate lato server)</p>
+        <hr>
+        <p>Nell'header di tutte le pagine abbiamo, oltre al signup e logout, il profilo dell'account loggato</p>
+        <p>con possibilità di cambiare lo stato dal menù a tendina</p>
+      </div>
     </nz-content>
 
   </nz-layout>

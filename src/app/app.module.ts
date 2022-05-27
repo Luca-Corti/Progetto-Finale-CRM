@@ -54,6 +54,9 @@ import { DettaglioFatturaComponent } from './Fatture-components/dettaglio-fattur
 import { ModificaClienteComponent } from './Clienti-components/modifica-cliente/modifica-cliente.component';
 import { ModificaFatturaComponent } from './Fatture-components/modifica-fattura/modifica-fattura.component';
 import { FatturaDaClientiComponent } from './Fatture-components/fattura-da-clienti/fattura-da-clienti.component';
+import { CercaClienteComponent } from './Clienti-components/cerca-cliente/cerca-cliente.component';
+import { CercaFatturaComponent } from './Fatture-components/cerca-fattura/cerca-fattura.component';
+import { AuthService } from './authentication/auth.service';
 
 
 const customLanguagePack = {
@@ -87,22 +90,27 @@ const routes:Route[] = [
   {
     path:"clienti",
     component:ClientiComponent,
+    canActivate:[AuthGuardGuard]
   },
   {
     path:"clienti/:id",
     component:DettaglioClienteComponent,
+    canActivate:[AuthGuardGuard]
   },
   {
     path:"fatture",
     component:FattureComponent,
+    canActivate:[AuthGuardGuard]
   },
   {
     path:"fatture/:id",
     component:DettaglioFatturaComponent,
+    canActivate:[AuthGuardGuard]
   },
   {
     path:"utenti",
-    component:UtentiComponent
+    component:UtentiComponent,
+    canActivate:[AuthGuardGuard]
   }
 ]
 
@@ -123,6 +131,8 @@ const routes:Route[] = [
     ModificaClienteComponent,
     ModificaFatturaComponent,
     FatturaDaClientiComponent,
+    CercaClienteComponent,
+    CercaFatturaComponent,
 
   ],
   imports: [

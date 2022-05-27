@@ -1,0 +1,97 @@
+<form nz-form [formGroup]="searchForm" (ngSubmit)="submitSearch()">
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="ricerca" nzRequired>Cerca per</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="campo obbligatorio!">
+      <nz-select id="ricerca" formControlName="ricerca" nzPlaceHolder="Seleziona un metodo di ricerca"
+        (ngModelChange)="changeSearch($event)">
+        <nz-option nzValue="byId" nzLabel="Per id fattura"></nz-option>
+        <nz-option nzValue="byRagioneSociale" nzLabel="Per id cliente"></nz-option>
+        <nz-option nzValue="byStato" nzLabel="Per stato fattura"></nz-option>
+        <nz-option nzValue="byAnno" nzLabel="Per anno"></nz-option>
+      </nz-select>
+    </nz-form-control>
+  </nz-form-item>
+  <!--BY ID-->
+  <ng-container *ngIf="byId">
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="byid">Inserisci id</nz-form-label>
+      <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="campo obbligatorio!">
+        <input nz-input formControlName="value" id="byid" />
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item nz-row class="register-area">
+      <nz-form-control [nzSpan]="14" [nzOffset]="6">
+        <button nz-button nzType="primary">Cerca fattura per Id</button>
+      </nz-form-control>
+    </nz-form-item>
+  </ng-container>
+  <!--BY RAGIONE SOCIALE (ID CLIENTE)-->
+  <ng-container *ngIf="byRagioneSociale">
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="byragione">Id Cliente</nz-form-label>
+      <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="campo obbligatorio!">
+        <input nz-input formControlName="value" id="byragione" />
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item nz-row class="register-area">
+      <nz-form-control [nzSpan]="14" [nzOffset]="6">
+        <button nz-button nzType="primary">Cerca fattura per cliente</button>
+      </nz-form-control>
+    </nz-form-item>
+  </ng-container>
+  <!--BY STATO-->
+  <ng-container *ngIf="byStato">
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="bystato">Cerca stato</nz-form-label>
+      <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="campo obbligatorio!">
+        <nz-select id="bystato" formControlName="value" nzPlaceHolder="Seleziona uno stato fattura">
+          <nz-option *ngFor="let stato of stati" [nzValue]="stato.id" [nzLabel]="stato.nome"></nz-option>
+        </nz-select>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item nz-row class="register-area">
+      <nz-form-control [nzSpan]="14" [nzOffset]="6">
+        <button nz-button nzType="primary">Cerca fattura per stato</button>
+      </nz-form-control>
+    </nz-form-item>
+  </ng-container>
+  <!--BY ANNO-->
+  <ng-container *ngIf="byAnno">
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="byanno">Cerca anno</nz-form-label>
+      <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="campo obbligatorio!">
+        <input type="number" nz-input formControlName="value" id="byanno" />
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item nz-row class="register-area">
+      <nz-form-control [nzSpan]="14" [nzOffset]="6">
+        <button nz-button nzType="primary">Cerca fattura per anno</button>
+      </nz-form-control>
+    </nz-form-item>
+  </ng-container>
+  </form>
+  <!--MOSTRO RISULTATO RICERCA-->
+  <h2 *ngIf="loading">Loading...</h2>
+  <nz-table #basicTable *ngIf="risultato" [nzData]="risultato" [nzTotal]="totalElements">
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>Importo</th>
+        <th>Stato</th>
+        <th>Anno</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let data of basicTable.data">
+        <td>{{ data.id }}</td>
+        <td>{{ data.importo }}</td>
+        <td>{{ data.stato.nome }}</td>
+        <td>{{ data.anno }}</td>
+        <td>
+          <button nz-button nzType="primary" (click)="dettaglioFattura(data)" >Dettaglio</button>
+        </td>
+      </tr>
+    </tbody>
+  </nz-table>
+

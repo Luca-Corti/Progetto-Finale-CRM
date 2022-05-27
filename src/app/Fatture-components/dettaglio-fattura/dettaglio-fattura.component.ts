@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/authentication/auth.service';
 import { FattureService } from 'src/app/Services/fatture.service';
 
 @Component({
@@ -9,8 +10,8 @@ import { FattureService } from 'src/app/Services/fatture.service';
 })
 export class DettaglioFatturaComponent implements OnInit {
   fatturaDettaglio = this.fatSrv.fatturaDettaglio
-
-  constructor(private router:Router, private fatSrv:FattureService) { }
+  nomeAccount=this.authSrv.user.username
+  constructor(private router:Router, private fatSrv:FattureService, private authSrv:AuthService) { }
 
   onBack(){
     this.router.navigate(['/fatture'])

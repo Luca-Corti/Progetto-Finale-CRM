@@ -28,7 +28,7 @@
         <button nz-button nzType="primary" nzDanger>Logout</button>
         <nz-avatar nz-page-header-avatar nzSrc="https://avatars0.githubusercontent.com/u/22736418?s=88&v=4"></nz-avatar>
         <a nz-dropdown [nzDropdownMenu]="menu">
-          <nz-page-header-title>Gigi Calamaro <i nz-icon nzType="down" style="font-size: 10px;"></i>
+          <nz-page-header-title>{{nomeAccount}}<i nz-icon nzType="down" style="font-size: 10px;"></i>
           </nz-page-header-title>
           <nz-page-header-tags>
             <nz-tag [nzColor]="status.color">{{status.name}}</nz-tag>
@@ -58,8 +58,8 @@
       <nz-page-header>
         <nz-page-header-title>Clienti</nz-page-header-title>
         <nz-page-header-extra>
-          <button nz-button (click)="showModal()">Nuovo Cliente</button>
-          <button nz-button>Cerca Cliente</button>
+          <button nz-button (click)="nuovoModal()">Nuovo Cliente</button>
+          <button nz-button (click)="cercaModal()">Cerca Cliente</button>
           <button nz-button nzType="primary">Lorem</button>
         </nz-page-header-extra>
         <nz-modal
@@ -75,6 +75,18 @@
           <app-nuovo-cliente [comuni]="comuni" [province]="province"></app-nuovo-cliente>
         </div>
       </nz-modal>
+      <nz-modal
+      nzMaskClosable="false"
+      [(nzVisible)]="cercaVisible"
+      nzWidth="60vw"
+      nzTitle="Ricerca Cliente"
+      (nzOnCancel)="handleCancelCerca()"
+      (nzOnOk)="handleOkCerca()"
+    >
+      <div *nzModalContent id="creaModal">
+        <app-cerca-cliente></app-cerca-cliente>
+      </div>
+    </nz-modal>
 
         <nz-page-header-content>
           <nz-row nzType="flex">
@@ -103,15 +115,17 @@
             <th [nzSortFn]="colonnaFatturato.compare" [nzSortPriority]="colonnaFatturato.priority">
               Fatturato annuale
             </th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let data of sortTable.data" (click)="dettaglioCliente(data)" >
+          <tr *ngFor="let data of sortTable.data" >
             <td>{{ data.id }}</td>
             <td>{{ data.ragioneSociale }}</td>
             <td>{{ data.email }}</td>
             <td>{{ data.telefono }}</td>
             <td>{{data.fatturatoAnnuale}}</td>
+            <td><button nz-button nzType="primary" (click)="dettaglioCliente(data)">Dettaglio</button></td>
           </tr>
         </tbody>
       </nz-table>

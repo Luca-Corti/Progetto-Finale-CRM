@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/authentication/auth.service';
 import { Cliente } from '../../interfaces/cliente';
 import { ClientiService } from '../../Services/clienti.service';
 
@@ -9,6 +10,7 @@ import { ClientiService } from '../../Services/clienti.service';
   styleUrls: ['./clienti.component.scss']
 })
 export class ClientiComponent implements OnInit {
+  nomeAccount=this.authSrv.user.username
 dati:any;
 datiComune:any
 datiProvincia:any
@@ -32,7 +34,7 @@ colonnaFatturato =
     priority: 4
   };
 
-  constructor(private srv:ClientiService, private router:Router) { }
+  constructor(private srv:ClientiService, private router:Router, private authSrv:AuthService) { }
   getAllClients(page:number){
     this.srv.getAllClients(page - 1).subscribe((data)=>{
       this.dati = data
@@ -80,7 +82,7 @@ colonnaFatturato =
   isVisible = false;
   isOkLoading = false;
   //MODALE NUOVO CLIENTE
-  showModal(): void {
+  nuovoModal(): void {
     this.isVisible = true;
   }
   handleOk(): void {
@@ -93,7 +95,17 @@ colonnaFatturato =
   handleCancel(): void {
     this.isVisible = false;
   }
-
+  //MODALE CERCA CLIENTE
+  cercaVisible=false
+  cercaModal(): void {
+    this.cercaVisible = true;
+  }
+  handleOkCerca(): void {
+    this.cercaVisible = false;
+  }
+  handleCancelCerca(): void {
+    this.cercaVisible = false;
+  }
 
   //ON INIT
   ngOnInit(): void {

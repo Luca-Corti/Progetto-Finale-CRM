@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from '../authentication/auth.service';
 import { UtentiService } from '../Services/utenti.service';
 
 @Component({
@@ -11,8 +12,9 @@ export class UtentiComponent implements OnInit {
   utenti!:any
   page:number=1;
   totalElements!:number
+  nomeAccount=this.authSrv.user.username
 
-  constructor(private srv:UtentiService){ }
+  constructor(private srv:UtentiService, private authSrv:AuthService){ }
 
   getAllUsers(page:number){
     this.srv.getAllUsers(page - 1).subscribe((data)=>{

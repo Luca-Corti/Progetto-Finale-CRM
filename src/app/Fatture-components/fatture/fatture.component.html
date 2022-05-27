@@ -28,7 +28,7 @@
         <button nz-button nzType="primary" nzDanger>Logout</button>
         <nz-avatar nz-page-header-avatar nzSrc="https://avatars0.githubusercontent.com/u/22736418?s=88&v=4"></nz-avatar>
         <a nz-dropdown [nzDropdownMenu]="menu" >
-          <nz-page-header-title>Gigi Calamaro <i nz-icon nzType="down" style="font-size: 10px;"></i>
+          <nz-page-header-title>{{nomeAccount}}<i nz-icon nzType="down" style="font-size: 10px;"></i>
           </nz-page-header-title>
           <nz-page-header-tags>
             <nz-tag [nzColor]="status.color">{{status.name}}</nz-tag>
@@ -57,7 +57,7 @@
         <nz-page-header-title>Fatture</nz-page-header-title>
         <nz-page-header-extra>
           <button nz-button (click)="showModal()">Nuova fattura</button>
-          <button nz-button>Cerca Fattura</button>
+          <button nz-button (click)="cercaModal()">Cerca Fattura</button>
           <button nz-button nzType="primary">Lorem</button>
         </nz-page-header-extra>
         <nz-modal
@@ -71,6 +71,18 @@
       >
         <div *nzModalContent id="creaModal">
           <app-nuova-fattura [stati]="stati" ></app-nuova-fattura>
+        </div>
+      </nz-modal>
+      <nz-modal
+        nzMaskClosable="false"
+        [(nzVisible)]="cercaVisible"
+        nzWidth="60vw"
+        nzTitle="Cerca Fattura"
+        (nzOnCancel)="handleCancelCerca()"
+        (nzOnOk)="handleOkCerca()"
+      >
+        <div *nzModalContent id="creaModal">
+          <app-cerca-fattura [stati]="stati" ></app-cerca-fattura>
         </div>
       </nz-modal>
         <nz-page-header-content>

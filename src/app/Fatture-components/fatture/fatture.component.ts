@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/authentication/auth.service';
 import { Fattura } from '../../interfaces/fattura';
 import { FattureService } from '../../Services/fatture.service';
 
@@ -34,7 +35,8 @@ colonnaImporto =
                                           else{ return 1}},
     priority: 3
   };
-  constructor(private fatSrv:FattureService, private router:Router) { }
+  nomeAccount=this.authSrv.user.username
+  constructor(private fatSrv:FattureService, private router:Router,private authSrv:AuthService) { }
   log(){
     console.log(this.dati);
     console.log(this.fatture)
@@ -63,10 +65,22 @@ colonnaImporto =
       this.isOkLoading = false;
     }, 1000);
   }
-
   handleCancel(): void {
     this.isVisible = false;
   }
+  //MODALE CERCA FATTURA
+  cercaVisible=false
+  handleCancelCerca(): void {
+    this.cercaVisible = false;
+  }
+  cercaModal(): void {
+    this.cercaVisible = true;
+  }
+
+  handleOkCerca(): void {
+      this.cercaVisible = false;
+  }
+
   fatturaDettaglio:any
   dettaglioFattura(dati:any):void {
     this.fatturaDettaglio= dati
