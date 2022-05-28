@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthGuardGuard } from '../authentication/auth-guard.guard';
+import { environment } from 'src/environments/environment';
+
 import { AuthService } from '../authentication/auth.service';
 
 @Component({
@@ -14,6 +15,7 @@ nomeAccount=this.authSrv.user.username
     name:'Online',
     color:'green'
   }
+  width=environment.width
   changeStatus(value:string) {
     if(value=='Online'){this.status.name='Online';this.status.color='green'}
     else if(value=='Offline'){this.status.name='Offline';this.status.color='red'}

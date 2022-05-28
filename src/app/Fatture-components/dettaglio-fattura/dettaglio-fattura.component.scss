@@ -24,3 +24,8 @@ nz-content {
 .layout{
   height:100vh;
 }
+@media screen and (max-width:510px) {
+  nz-sider{
+    z-index:20
+  }
+}

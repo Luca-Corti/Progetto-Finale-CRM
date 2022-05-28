@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/authentication/auth.service';
 import { FattureService } from 'src/app/Services/fatture.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-dettaglio-fattura',
@@ -11,6 +12,8 @@ import { FattureService } from 'src/app/Services/fatture.service';
 export class DettaglioFatturaComponent implements OnInit {
   fatturaDettaglio = this.fatSrv.fatturaDettaglio
   nomeAccount=this.authSrv.user.username
+  width=environment.width
+  modalWidth='60vw'
   constructor(private router:Router, private fatSrv:FattureService, private authSrv:AuthService) { }
 
   onBack(){
@@ -48,6 +51,7 @@ export class DettaglioFatturaComponent implements OnInit {
     this.authSrv.logout()
   }
   ngOnInit(): void {
+    if(this.width<400){this.modalWidth='100vw'}
   }
 
 

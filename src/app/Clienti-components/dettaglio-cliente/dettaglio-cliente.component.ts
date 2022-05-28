@@ -5,6 +5,8 @@ import { NzModalService } from 'ng-zorro-antd/modal';
 import { AuthService } from 'src/app/authentication/auth.service';
 import { FattureService } from 'src/app/Services/fatture.service';
 import { ClientiService } from '../../Services/clienti.service';
+import { environment } from 'src/environments/environment';
+
 
 @Component({
   selector: 'app-dettaglio-cliente',
@@ -19,6 +21,8 @@ export class DettaglioClienteComponent implements OnInit, OnDestroy {
       this.errors=true;
     }
    }
+   width=environment.width
+   modalWidth='60vw'
    errors:boolean=false
   onBack(){
     this.router.navigate(['/clienti'])
@@ -96,6 +100,7 @@ export class DettaglioClienteComponent implements OnInit, OnDestroy {
   }
   ngOnInit(): void {
     this.getStatiFattura()
+    if(this.width<400){this.modalWidth='100vw'}
   }
   ngOnDestroy(): void {
     this.srv.clienteDettaglio = { }

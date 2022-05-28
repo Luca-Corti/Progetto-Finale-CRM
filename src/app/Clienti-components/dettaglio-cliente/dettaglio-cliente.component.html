@@ -25,7 +25,7 @@
 
       <nz-page-header-extra>
         <button nz-button routerLink="/register">SignUp</button>
-        <button nz-button nzType="primary" nzDanger (click)="logout()">Logout</button>
+        <button *ngIf="width>400" nz-button nzType="primary" nzDanger (click)="logout()">Logout</button>
         <nz-avatar nz-page-header-avatar nzSrc="https://avatars0.githubusercontent.com/u/22736418?s=88&v=4"></nz-avatar>
         <a nz-dropdown [nzDropdownMenu]="menu">
           <nz-page-header-title>{{nomeAccount}}<i nz-icon nzType="down" style="font-size: 10px;"></i>
@@ -46,7 +46,7 @@
                 <li nz-menu-item (click)="changeStatus('Invisibile')">Invisibile</li>
               </ul>
             <li nz-menu-item>Invia un feedback</li>
-            <li nz-menu-item nzDanger>Esci</li>
+            <li nz-menu-item nzDanger (click)="logout()">Esci</li>
           </ul>
         </nz-dropdown-menu>
       </nz-page-header-extra>
@@ -61,7 +61,7 @@ class="site-page-header"
 nzBackIcon
 nzTitle={{clienteDettaglio.ragioneSociale}}
 >
-<nz-page-header-extra>
+<nz-page-header-extra id="actions">
   <button nz-button (click)="showModal()">Modifica cliente</button>
   <button nz-button nzType="primary" (click)="nuovaFattura()">Aggiungi nuova fattura</button>
   <button nz-button nzType="primary" nzDanger (click)="showDeleteConfirm()">Cancella cliente</button>
@@ -69,7 +69,7 @@ nzTitle={{clienteDettaglio.ragioneSociale}}
 <nz-modal
 nzMaskClosable="false"
 [(nzVisible)]="isVisible"
-nzWidth="60vw"
+[nzWidth]="modalWidth"
 nzTitle="Modifica Cliente"
 (nzOnCancel)="handleCancel()"
 (nzOnOk)="handleOk()"
@@ -82,7 +82,7 @@ nzTitle="Modifica Cliente"
 <nz-modal
       nzMaskClosable="false"
       [(nzVisible)]="fatVisible"
-      nzWidth="60vw"
+      [nzWidth]="modalWidth"
       nzTitle="Crea Nuova Fattura"
       (nzOnCancel)="handleCancelFat()"
       (nzOnOk)="handleOkFat()"

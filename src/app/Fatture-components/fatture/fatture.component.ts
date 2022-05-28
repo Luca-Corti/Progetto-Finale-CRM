@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { AuthService } from 'src/app/authentication/auth.service';
 import { Fattura } from '../../interfaces/fattura';
 import { FattureService } from '../../Services/fatture.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-fatture',
@@ -15,6 +16,8 @@ fatture!:Fattura[]
 page:number=1;
 totalElements!:number
 stati:any
+width=environment.width
+modalWidth='60vw'
 colonnaId =
   {
     title: 'Id cliente',
@@ -104,6 +107,7 @@ colonnaImporto =
   ngOnInit(): void {
     this.getAllFatture(this.page -1);
     this.getStatiFattura()
+    if(this.width<400){this.modalWidth='100vw'}
   }
 
 }

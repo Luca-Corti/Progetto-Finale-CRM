@@ -25,7 +25,7 @@
 
       <nz-page-header-extra>
         <button nz-button routerLink="/register">SignUp</button>
-        <button nz-button nzType="primary" nzDanger (click)="logout()">Logout</button>
+        <button *ngIf="width>400" nz-button nzType="primary" nzDanger (click)="logout()">Logout</button>
         <nz-avatar nz-page-header-avatar nzSrc="https://avatars0.githubusercontent.com/u/22736418?s=88&v=4"></nz-avatar>
         <a nz-dropdown [nzDropdownMenu]="menu" >
           <nz-page-header-title>{{nomeAccount}}<i nz-icon nzType="down" style="font-size: 10px;"></i>
@@ -46,7 +46,7 @@
                 <li nz-menu-item (click)="changeStatus('Invisibile')">Invisibile</li>
               </ul>
             <li nz-menu-item>Invia un feedback</li>
-            <li nz-menu-item nzDanger>Esci</li>
+            <li nz-menu-item nzDanger (click)="logout()">Esci</li>
           </ul>
         </nz-dropdown-menu>
       </nz-page-header-extra>
@@ -58,12 +58,11 @@
         <nz-page-header-extra>
           <button nz-button (click)="showModal()">Nuova fattura</button>
           <button nz-button (click)="cercaModal()">Cerca Fattura</button>
-          <button nz-button nzType="primary">Lorem</button>
         </nz-page-header-extra>
         <nz-modal
         nzMaskClosable="false"
         [(nzVisible)]="isVisible"
-        nzWidth="60vw"
+        [nzWidth]="modalWidth"
         nzTitle="Crea Nuova Fattura"
         (nzOnCancel)="handleCancel()"
         (nzOnOk)="handleOk()"
@@ -76,7 +75,7 @@
       <nz-modal
         nzMaskClosable="false"
         [(nzVisible)]="cercaVisible"
-        nzWidth="60vw"
+        [nzWidth]="modalWidth"
         nzTitle="Cerca Fattura"
         (nzOnCancel)="handleCancelCerca()"
         (nzOnOk)="handleOkCerca()"
@@ -103,10 +102,10 @@
             <th >
               Cliente
             </th>
-            <th [nzSortFn]="colonnaNumero.compare" [nzSortPriority]="colonnaNumero.priority">
+            <th *ngIf="width>400" [nzSortFn]="colonnaNumero.compare" [nzSortPriority]="colonnaNumero.priority">
               Numero Fattura
             </th>
-            <th>
+            <th *ngIf="width>400">
               Data
             </th>
             <th [nzSortFn]="colonnaImporto.compare" [nzSortPriority]="colonnaImporto.priority">
@@ -118,8 +117,8 @@
           <tr *ngFor="let data of sortTable.data" (click)="dettaglioFattura(data)">
             <td>{{ data.id }}</td>
             <td>{{ data.cliente.ragioneSociale }}</td>
-            <td>{{ data.numero }}</td>
-            <td>{{ data.data }}</td>
+            <td *ngIf="width>400">{{ data.numero }}</td>
+            <td *ngIf="width>400">{{ data.data }}</td>
             <td>{{ data.importo }}</td>
           </tr>
         </tbody>

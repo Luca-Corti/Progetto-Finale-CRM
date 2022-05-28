@@ -21,11 +21,19 @@ nz-content {
   min-height: 100%;
 }
 .layout{
-  height:150vh;
+  height:180vh;
 }
 .border {
   border:1px solid white;
   border-radius: 10px;
   padding:5px 10%;
   margin-bottom: 5px;
+}
+@media screen and (max-width: 460px){
+  nz-sider{
+    z-index: 20;
+  }
+  h2{
+    margin-top:40px
+  }
 }

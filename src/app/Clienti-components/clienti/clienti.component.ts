@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { AuthService } from 'src/app/authentication/auth.service';
 import { Cliente } from '../../interfaces/cliente';
 import { ClientiService } from '../../Services/clienti.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-clienti',
@@ -19,6 +20,9 @@ export class ClientiComponent implements OnInit {
   province!: any
   page: number = 1;
   totalElements!: number
+  width=environment.width
+  modalWidth='60vw'
+
   // COLONNE CHE ORDINANO I DATI DELLA PAGINA, IN BASE A ID E FATTURATO
   colonnaId =
     {
@@ -160,6 +164,7 @@ export class ClientiComponent implements OnInit {
     this.getAllClients(this.page - 1)
     this.getAllComuni()
     this.getAllProvince()
+    if(this.width<400){this.modalWidth='100vw'}
 
   }
 

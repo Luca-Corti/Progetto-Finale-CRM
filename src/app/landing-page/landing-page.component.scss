@@ -22,3 +22,14 @@
   padding:5% 10%;
   text-align: center;
 }
+@media screen and (max-width: 460px){
+  button{
+    z-index:5;
+    background-color: #117DDC;
+    margin-left:-5%
+  }
+  .background2{
+    background-image: none;
+    z-index: -1;
+  }
+}

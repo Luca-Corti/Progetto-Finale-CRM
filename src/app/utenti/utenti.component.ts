@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../authentication/auth.service';
 import { UtentiService } from '../Services/utenti.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-utenti',
@@ -13,7 +14,7 @@ export class UtentiComponent implements OnInit {
   page:number=1;
   totalElements!:number
   nomeAccount=this.authSrv.user.username
-
+width=environment.width
   constructor(private srv:UtentiService, private authSrv:AuthService){ }
 
   getAllUsers(page:number){

@@ -25,7 +25,7 @@
 
       <nz-page-header-extra>
         <button nz-button routerLink="/register">SignUp</button>
-        <button nz-button nzType="primary" nzDanger (click)="logout()">Logout</button>
+        <button *ngIf="width>400" nz-button nzType="primary" nzDanger (click)="logout()">Logout</button>
         <nz-avatar nz-page-header-avatar nzSrc="https://avatars0.githubusercontent.com/u/22736418?s=88&v=4"></nz-avatar>
         <a nz-dropdown [nzDropdownMenu]="menu" >
           <nz-page-header-title>{{nomeAccount}}<i nz-icon nzType="down" style="font-size: 10px;"></i>
@@ -46,7 +46,7 @@
                 <li nz-menu-item (click)="changeStatus('Invisibile')">Invisibile</li>
               </ul>
             <li nz-menu-item>Invia un feedback</li>
-            <li nz-menu-item nzDanger>Esci</li>
+            <li nz-menu-item nzDanger  (click)="logout()">Esci</li>
           </ul>
         </nz-dropdown-menu>
       </nz-page-header-extra>
@@ -65,23 +65,23 @@
       <div class="container border">
         <p>Nella pagina clienti abbiamo la lista di tutti i clienti con paginazione lato server e qui possiamo:</p>
         <ul>
-        <li>1)Visitare la pagina dettaglio (che si passa i dati dalla pagina padre risparmiando chiamate al server)</li>
-        <li>2)Creare un nuovo cliente</li>
-        <li>3)Cercare un cliente per id o ragione sociale</li>
+        <li>Visitare la pagina dettaglio (che si passa i dati dalla pagina padre risparmiando chiamate al server)</li>
+        <li>Creare un nuovo cliente</li>
+        <li>Cercare un cliente per id o ragione sociale</li>
       </ul>
         <p>Nella pagina dettaglio cliente possiamo:</p>
         <ul>
-        <li>1)Modificare il cliente</li>
-        <li>2)Cancellare il cliente</li>
-        <li>3)Aggiungere una nuova fattura a lui correlata</li>
+        <li>Modificare il cliente</li>
+        <li>Cancellare il cliente</li>
+        <li>Aggiungere una nuova fattura a lui correlata</li>
       </ul>
     </div>
     <div class="container border">
         <p>Nella pagina Fatture abbiamo la lista di tutte le fatture con paginazione lato server e qui possiamo:</p>
         <ul>
-        <li>1)Vedere il dettaglio fattura(sempre passaggio dati padre-figlio)</li>
-        <li>2)Creare una nuova fattura mediante un modale che presenta una ricerca del cliente a cui aggiungere la medesima</li>
-        <li>3)Cercare una fattura per id, id cliente, Stato fattura ed anno tramite un modale.</li>
+        <li>Vedere il dettaglio fattura(sempre passaggio dati padre-figlio)</li>
+        <li>Creare una nuova fattura mediante un modale che presenta una ricerca del cliente a cui aggiungere la medesima</li>
+        <li>Cercare una fattura per id, id cliente, Stato fattura ed anno tramite un modale.</li>
         </ul>
         <p>Il risultato della ricerca è paginato lato client, risparmiando molte chiamate al server</p>
         <p>Nel dettaglio fattura possiamo modificare lo stato o cancellare la fattura</p>
@@ -95,6 +95,10 @@
       <div class="container border">
         <p>Nell'header di tutte le pagine abbiamo, oltre al signup e logout, il profilo dell'account loggato</p>
         <p>con possibilità di cambiare lo stato dal menù a tendina</p>
+      </div>
+      <div class="container border">
+        <p>L'app è responsive per dispositivi mobile, (es. tabelle e modali hanno colonne e visualizzazioni diverse in base all width del device)</p>
+        <p>La width del device viene presa On init dell'app, quindi per i test se si apre l'ispeziona per i test responsive da width>400,e viceversa,  bisogna refreshare</p>
       </div>
       </div>
     </nz-content>

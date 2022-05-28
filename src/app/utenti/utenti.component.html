@@ -25,7 +25,7 @@
 
       <nz-page-header-extra>
         <button nz-button routerLink="/register">SignUp</button>
-        <button nz-button nzType="primary" nzDanger (click)="logout()">Logout</button>
+        <button *ngIf="width>400" nz-button nzType="primary" nzDanger (click)="logout()">Logout</button>
         <nz-avatar nz-page-header-avatar nzSrc="https://avatars0.githubusercontent.com/u/22736418?s=88&v=4"></nz-avatar>
         <a nz-dropdown [nzDropdownMenu]="menu" >
           <nz-page-header-title>{{nomeAccount}}<i nz-icon nzType="down" style="font-size: 10px;"></i>
@@ -46,7 +46,7 @@
                 <li nz-menu-item (click)="changeStatus('Invisibile')">Invisibile</li>
               </ul>
             <li nz-menu-item>Invia un feedback</li>
-            <li nz-menu-item nzDanger>Esci</li>
+            <li nz-menu-item nzDanger (click)="logout()">Esci</li>
           </ul>
         </nz-dropdown-menu>
       </nz-page-header-extra>
@@ -70,9 +70,6 @@
             <th>
               E-mail
             </th>
-            <th>
-              Ruolo
-            </th>
           </tr>
         </thead>
         <tbody>
@@ -80,7 +77,6 @@
             <td>{{ data.id }}</td>
             <td>{{ data.username }}</td>
             <td>{{ data.email }}</td>
-            <td>{{ data.roles.roleName }}</td>
           </tr>
         </tbody>
       </nz-table>
