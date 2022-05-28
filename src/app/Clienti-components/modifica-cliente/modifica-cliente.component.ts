@@ -1,8 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
 import { en_US, it_IT, NzI18nService } from 'ng-zorro-antd/i18n';
-import { Cliente } from '../../interfaces/cliente';
 import { ClientiService } from '../../Services/clienti.service';
 
 @Component({
@@ -40,6 +38,7 @@ export class ModificaClienteComponent implements OnInit {
     if (this.validateForm.valid) {
       console.log('submit', this.validateForm.value);
       this.srv.putCliente(this.validateForm.value, this.clienteDettaglio.id ).subscribe();
+      localStorage.setItem('lastDetailCliente', JSON.stringify(this.validateForm.value))
     } else {
       console.log('invalid submit', this.validateForm.value)
       Object.values(this.validateForm.controls).forEach(control => {

@@ -1,9 +1,12 @@
 .logo {
-  height: 32px;
-  width: 70px;
-  background-image: url(../../assets/logo-spaces.webp);
-  background-size: cover;
+  height: 60px;
+  width: 168px;
+  background: rgba(255, 255, 255, 0.85);
   margin: 16px;
+}
+.logo img {
+  height: 60px;
+  width: 168px;
 }
 nz-header {
   background: rgba(255, 255, 255, 0.2);

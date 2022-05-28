@@ -7,8 +7,7 @@ import { FatturaForm } from '../interfaces/fattura-form';
   providedIn: 'root'
 })
 export class FattureService {
-  fatturaDettaglio:any
-  statiFatture:any
+
   constructor(private http:HttpClient) { }
   getAllFatture(page:number){
    return this.http.get(`${environment.serverAddress}/api/fatture?page=${page}&size=20&sort=id,ASC`)
@@ -49,5 +48,8 @@ export class FattureService {
   }
   putFattura(fattura:FatturaForm, id:number){
     return this.http.put(`${environment.serverAddress}/api/fatture/${id}`, fattura)
+  }
+  deleteFattura(idFat:number){
+    return this.http.delete(`${environment.serverAddress}/api/fatture/${idFat}`)
   }
 }

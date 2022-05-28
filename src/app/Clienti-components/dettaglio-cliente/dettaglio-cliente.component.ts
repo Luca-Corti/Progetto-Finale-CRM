@@ -1,5 +1,5 @@
 
-import { Component, OnDestroy, OnInit, } from '@angular/core';
+import { Component, ElementRef, OnDestroy, OnInit, ViewChild, } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { AuthService } from 'src/app/authentication/auth.service';
@@ -52,7 +52,11 @@ export class DettaglioClienteComponent implements OnInit, OnDestroy {
       nzOkText: 'Yes',
       nzOkType: 'primary',
       nzOkDanger: true,
-      nzOnOk: () => {this.deleteCliente(this.clienteDettaglio.id);this.cancelled=true},
+      nzOnOk: () => {
+        this.deleteCliente(this.clienteDettaglio.id);
+        this.cancelled=true
+        localStorage.removeItem('lastDetailCliente')
+      },
       nzCancelText: 'No',
       nzOnCancel: () => {}
     });
@@ -63,7 +67,6 @@ export class DettaglioClienteComponent implements OnInit, OnDestroy {
       this.isVisible = false;
       this.isOkLoading = false;
     }, 1000);
-    this.router.navigate(['/clienti'])
   }
 
   handleCancel(): void {
@@ -92,8 +95,31 @@ export class DettaglioClienteComponent implements OnInit, OnDestroy {
     this.fatSrv.getStatiFattura().subscribe((data)=>{
       this.stati=data
       this.stati=this.stati.content
-      this.fatSrv.statiFatture = this.stati
+      localStorage.setItem('statiFattura', JSON.stringify(this.stati))
     })
+  }
+  loading:boolean=false
+  metadati:any
+  totalElements:any
+  risultato:any
+  mostraFatture(){
+    this.getFatturaByRagioneSociale(this.clienteDettaglio.id)
+  }
+  getFatturaByRagioneSociale(idcliente:number){
+    this.loading=true
+    this.fatSrv.getFatturaByRS(idcliente).subscribe(data=>{
+      this.metadati=data
+      this.totalElements= this.metadati.totalElements
+      this.fatSrv.unpagedFatturaByRS(idcliente, this.totalElements).subscribe(val=>{
+        this.risultato=val
+        this.risultato=this.risultato.content
+        this.loading= false
+      })
+    })
+  }
+  dettaglioFattura(dati:any):void {
+    localStorage.setItem('LastDetailFattura', JSON.stringify(dati))
+    this.router.navigate(['/fatture', dati.id])
   }
   logout(){
     this.authSrv.logout()

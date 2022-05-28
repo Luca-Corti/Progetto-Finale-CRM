@@ -96,7 +96,7 @@ export class CercaFatturaComponent implements OnInit {
     }
     dettaglioFattura(dati:any):void {
       console.log(dati)
-       this.fatSrv.fatturaDettaglio = dati
+      localStorage.setItem('LastDetailFattura', JSON.stringify(dati))
       this.router.navigate(['/fatture', dati.id])
     }
   constructor(private fb: FormBuilder, private fatSrv:FattureService, private router:Router) { }

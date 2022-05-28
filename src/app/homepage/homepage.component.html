@@ -1,6 +1,6 @@
 <nz-layout class="layout">
   <nz-sider nzCollapsible nzBreakpoint="lg" [nzCollapsedWidth]="0">
-    <div class="logo" routerLink="/home"></div>
+    <div class="logo" routerLink="/home"><img src="../../assets/logo-spaces.webp" alt="logo"></div>
     <ul nz-menu nzTheme="dark" nzMode="inline">
       <li nz-menu-item routerLink="/clienti">
         <i nz-icon nzType="user" nzTheme="outline"></i>
@@ -60,7 +60,7 @@
         <p>Landing page iniziale se non si è loggati con link alle pagine signUp e Login</p>
         <p>pagine signup e login tra loro linkate, al login salvo l'utente nel localstorage e ne consento la permanenza fino al logout</p>
         <p>Una volta loggato ho accesso a:</p>
-        <p>3 pagine principali, clienti fatture e utenti protette da guard su login+ 1 pagina per admin protetta ulteriormente da role=admin</p>
+        <p>3 pagine principali, clienti fatture e utenti protette da guard su login+ 1 pagina per admin protetta ulteriormente da role=admin e pagina 404 per rotte **</p>
       </div>
       <div class="container border">
         <p>Nella pagina clienti abbiamo la lista di tutti i clienti con paginazione lato server e qui possiamo:</p>
@@ -74,6 +74,7 @@
         <li>Modificare il cliente</li>
         <li>Cancellare il cliente</li>
         <li>Aggiungere una nuova fattura a lui correlata</li>
+        <li>Visualizzare tutte le fatture di quel cliente specifico, paginazione lato client/li>
       </ul>
     </div>
     <div class="container border">

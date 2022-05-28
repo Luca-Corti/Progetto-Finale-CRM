@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { NzModalService } from 'ng-zorro-antd/modal';
 import { AuthService } from 'src/app/authentication/auth.service';
 import { FattureService } from 'src/app/Services/fatture.service';
 import { environment } from 'src/environments/environment';
@@ -10,11 +11,15 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./dettaglio-fattura.component.scss']
 })
 export class DettaglioFatturaComponent implements OnInit {
-  fatturaDettaglio = this.fatSrv.fatturaDettaglio
+  fatturaDettaglio:any
   nomeAccount=this.authSrv.user.username
   width=environment.width
   modalWidth='60vw'
-  constructor(private router:Router, private fatSrv:FattureService, private authSrv:AuthService) { }
+  errors:boolean=false
+  idRotta:number|string;
+  constructor(private router:Router, private fatSrv:FattureService,private modal: NzModalService, private authSrv:AuthService, private rotta:ActivatedRoute) {
+    this.idRotta = this.rotta.snapshot.params['id']
+   }
 
   onBack(){
     this.router.navigate(['/fatture'])
@@ -47,10 +52,42 @@ export class DettaglioFatturaComponent implements OnInit {
   handleCancel(): void {
     this.isVisible = false;
   }
+  cancelled:boolean=false
+  showDeleteConfirm(): void {
+    this.modal.confirm({
+      nzTitle: 'Sei sicuro di voler cancellare questa fattura?',
+      nzContent: '<b style="color: red;">Questa azione è potenzialmente illegale, assicurati di avere un buon avvocato</b>',
+      nzOkText: 'Yes',
+      nzOkType: 'primary',
+      nzOkDanger: true,
+      nzOnOk: () => {
+        this.deleteFattura(this.fatturaDettaglio.id);
+        this.cancelled=true;
+        localStorage.removeItem('LastDetailFattura')
+      },
+      nzCancelText: 'No',
+      nzOnCancel: () => {}
+    });
+  }
+  deleteFattura(id:number){
+    this.fatSrv.deleteFattura(id).subscribe()
+  }
   logout(){
     this.authSrv.logout()
   }
   ngOnInit(): void {
+    let json= localStorage.getItem('LastDetailFattura')
+    if(json){this.fatturaDettaglio=JSON.parse(json);
+      if(this.idRotta==this.fatturaDettaglio.id){
+        return
+      }
+      else{
+        this.router.navigate(['/fatture'])
+      }
+    }
+    else{this.errors=true}
+
+
     if(this.width<400){this.modalWidth='100vw'}
   }
 

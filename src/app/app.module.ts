@@ -14,8 +14,8 @@ import { NgZorroModule } from './ng-zorro/ng-zorro.module';
 // Import icons
 import { IconDefinition } from '@ant-design/icons-angular';
 import { NzIconModule } from 'ng-zorro-antd/icon';
-import { UserOutline, FileSearchOutline, TeamOutline, UserAddOutline, LoginOutline, ArrowLeftOutline, LockOutline, MailOutline, FontColorsOutline} from '@ant-design/icons-angular/icons';
-const icons: IconDefinition[] = [ UserOutline, TeamOutline, FileSearchOutline, UserAddOutline, LoginOutline, ArrowLeftOutline, LockOutline, MailOutline, FontColorsOutline];
+import { UserOutline, FileSearchOutline, TeamOutline, UserAddOutline, LoginOutline, ArrowLeftOutline, LockOutline, MailOutline, FontColorsOutline, WarningFill} from '@ant-design/icons-angular/icons';
+const icons: IconDefinition[] = [ UserOutline, TeamOutline, FileSearchOutline, UserAddOutline, LoginOutline, ArrowLeftOutline, LockOutline, MailOutline, FontColorsOutline, WarningFill];
 //import components
 import { LandingPageComponent } from './landing-page/landing-page.component';
 import { HomepageComponent } from './homepage/homepage.component';

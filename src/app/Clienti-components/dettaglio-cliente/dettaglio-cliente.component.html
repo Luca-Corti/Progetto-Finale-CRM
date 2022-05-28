@@ -1,6 +1,6 @@
 <nz-layout class="layout">
   <nz-sider nzCollapsible nzBreakpoint="lg" [nzCollapsedWidth]="0">
-    <div class="logo" routerLink="/home"></div>
+    <div class="logo" routerLink="/home"><img src="../../assets/logo-spaces.webp" alt="logo"></div>
     <ul nz-menu nzTheme="dark" nzMode="inline">
       <li nz-menu-item routerLink="/clienti">
         <i nz-icon nzType="user" nzTheme="outline"></i>
@@ -64,6 +64,7 @@ nzTitle={{clienteDettaglio.ragioneSociale}}
 <nz-page-header-extra id="actions">
   <button nz-button (click)="showModal()">Modifica cliente</button>
   <button nz-button nzType="primary" (click)="nuovaFattura()">Aggiungi nuova fattura</button>
+  <button nz-button nzType="primary" (click)="mostraFatture()">Fatture di questo cliente</button>
   <button nz-button nzType="primary" nzDanger (click)="showDeleteConfirm()">Cancella cliente</button>
 </nz-page-header-extra>
 <nz-modal
@@ -93,6 +94,7 @@ nzTitle="Modifica Cliente"
       </div>
     </nz-modal>
 </nz-page-header>
+<h2 *ngIf="loading">Loading...</h2>
 <nz-descriptions
 nzTitle={{clienteDettaglio.ragioneSociale}}
 nzBordered
@@ -151,6 +153,29 @@ nzBordered
 </nz-descriptions-item>
 <nz-descriptions-item nzTitle="Fatturato annuale" *ngIf="clienteDettaglio.fatturatoAnnuale">{{clienteDettaglio.fatturatoAnnuale}}</nz-descriptions-item>
 </nz-descriptions>
+<h2 *ngIf="loading">Loading...</h2>
+  <nz-table #basicTable *ngIf="risultato" [nzData]="risultato" [nzTotal]="totalElements">
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>Importo</th>
+        <th>Stato</th>
+        <th>Anno</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let data of basicTable.data">
+        <td>{{ data.id }}</td>
+        <td>{{ data.importo }}</td>
+        <td>{{ data.stato.nome }}</td>
+        <td>{{ data.anno }}</td>
+        <td>
+          <button nz-button nzType="primary" (click)="dettaglioFattura(data)" >Dettaglio</button>
+        </td>
+      </tr>
+    </tbody>
+  </nz-table>
 </nz-content>
 </ng-container>
 <ng-template #error>

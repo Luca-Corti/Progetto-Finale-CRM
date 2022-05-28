@@ -86,8 +86,7 @@ colonnaImporto =
   fatturaDettaglio:any
   dettaglioFattura(dati:any):void {
     this.fatturaDettaglio= dati
-    this.fatSrv.fatturaDettaglio=this.fatturaDettaglio
-    console.log(this.fatSrv.fatturaDettaglio)
+    localStorage.setItem('LastDetailFattura', JSON.stringify(this.fatturaDettaglio))
     this.router.navigate(['/fatture', dati.id])
   }
   getAllFatture(page:number){
@@ -101,7 +100,7 @@ colonnaImporto =
     this.fatSrv.getStatiFattura().subscribe((data)=>{
       this.stati=data
       this.stati=this.stati.content
-      this.fatSrv.statiFatture = this.stati
+      localStorage.setItem('statiFattura', JSON.stringify(this.stati))
     })
   }
   ngOnInit(): void {
