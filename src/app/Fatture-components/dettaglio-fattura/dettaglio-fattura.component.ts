@@ -11,32 +11,34 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./dettaglio-fattura.component.scss']
 })
 export class DettaglioFatturaComponent implements OnInit {
-  fatturaDettaglio:any
-  nomeAccount=this.authSrv.user.username
-  width=environment.width
-  modalWidth='60vw'
-  errors:boolean=false
-  idRotta:number|string;
-  constructor(private router:Router, private fatSrv:FattureService,private modal: NzModalService, private authSrv:AuthService, private rotta:ActivatedRoute) {
-    this.idRotta = this.rotta.snapshot.params['id']
-   }
 
-  onBack(){
+  fatturaDettaglio: any
+  nomeAccount = this.authSrv.user.username
+  width = environment.width
+  modalWidth = '60vw'
+  errors: boolean = false
+  idRotta: number | string;
+
+  constructor(private router: Router, private fatSrv: FattureService, private modal: NzModalService, private authSrv: AuthService, private rotta: ActivatedRoute) {
+    this.idRotta = this.rotta.snapshot.params['id']
+  }
+
+  onBack() {
     this.router.navigate(['/fatture'])
   }
-  status={
-    name:'Online',
-    color:'green'
+  status = {
+    name: 'Online',
+    color: 'green'
   }
-  changeStatus(value:string) {
-    if(value=='Online'){this.status.name='Online';this.status.color='green'}
-    else if(value=='Offline'){this.status.name='Offline';this.status.color='red'}
-    else if(value=='ND'){this.status.name='Non disponibile';this.status.color='gold'}
-    else if(value=='Invisibile'){this.status.name='Invisibile';this.status.color=''}
+  changeStatus(value: string) {
+    if (value == 'Online') { this.status.name = 'Online'; this.status.color = 'green' }
+    else if (value == 'Offline') { this.status.name = 'Offline'; this.status.color = 'red' }
+    else if (value == 'ND') { this.status.name = 'Non disponibile'; this.status.color = 'gold' }
+    else if (value == 'Invisibile') { this.status.name = 'Invisibile'; this.status.color = '' }
   }
   isVisible = false;
   isOkLoading = false;
-
+  //MODALE
   showModal(): void {
     this.isVisible = true;
   }
@@ -46,13 +48,12 @@ export class DettaglioFatturaComponent implements OnInit {
       this.isVisible = false;
       this.isOkLoading = false;
     }, 1000);
-    //this.router.navigate(['/fatture'])
   }
-
   handleCancel(): void {
     this.isVisible = false;
   }
-  cancelled:boolean=false
+  //MODALE CANCELLA FATTURA
+  cancelled: boolean = false
   showDeleteConfirm(): void {
     this.modal.confirm({
       nzTitle: 'Sei sicuro di voler cancellare questa fattura?',
@@ -62,33 +63,34 @@ export class DettaglioFatturaComponent implements OnInit {
       nzOkDanger: true,
       nzOnOk: () => {
         this.deleteFattura(this.fatturaDettaglio.id);
-        this.cancelled=true;
+        this.cancelled = true;
         localStorage.removeItem('LastDetailFattura')
       },
       nzCancelText: 'No',
-      nzOnCancel: () => {}
+      nzOnCancel: () => { }
     });
   }
-  deleteFattura(id:number){
+  deleteFattura(id: number) {
     this.fatSrv.deleteFattura(id).subscribe()
   }
-  logout(){
+  logout() {
     this.authSrv.logout()
   }
+  //ONINIT RECUPERO DATI DA LOCALSTORAGE E VERIFICO CHE UTENTE VENGA DALLA GIUSTA ROTTA
   ngOnInit(): void {
-    let json= localStorage.getItem('LastDetailFattura')
-    if(json){this.fatturaDettaglio=JSON.parse(json);
-      if(this.idRotta==this.fatturaDettaglio.id){
+    let json = localStorage.getItem('LastDetailFattura')
+    if (json) {
+      this.fatturaDettaglio = JSON.parse(json);
+      if (this.idRotta == this.fatturaDettaglio.id) {
         return
       }
-      else{
+      else {
         this.router.navigate(['/fatture'])
       }
     }
-    else{this.errors=true}
+    else { this.errors = true }
 
-
-    if(this.width<400){this.modalWidth='100vw'}
+    if (this.width < 400) { this.modalWidth = '100vw' }
   }
 
 

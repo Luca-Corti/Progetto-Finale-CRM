@@ -10,19 +10,21 @@ import { FattureService } from 'src/app/Services/fatture.service';
   styleUrls: ['./fattura-da-clienti.component.scss']
 })
 export class FatturaDaClientiComponent implements OnInit {
-@Input() clienteDettaglio:any
-@Input() stati:any
-constructor(private fb: FormBuilder, private srv: ClientiService, private fatSrv:FattureService,private i18n: NzI18nService) {
-  this.changeLanguage(en_US)
- }
- changeLanguage(value: any): void {
-  this.i18n.setLocale(value)
-}
+  @Input() clienteDettaglio: any
+  @Input() stati: any
+  constructor(private fb: FormBuilder, private srv: ClientiService, private fatSrv: FattureService, private i18n: NzI18nService) {
+    this.changeLanguage(en_US)
+  }
+  changeLanguage(value: any): void {
+    this.i18n.setLocale(value)
+  }
+  //SET ID STATO FATTURA IN BASE AL NOME DAL SELECT
   validateForm!: FormGroup;
   setIdStato(value: string): void {
     let find = this.stati.find((ele: any) => ele.nome == value)
     this.validateForm.get('stato.id')!.setValue(find.id);
   }
+  //SUBMIT
   submitForm(): void {
     this.validateForm.get('cliente')!.setValue(this.clienteDettaglio);
     this.validateForm.get('data')!.setValue(this.validateForm.value.data.toISOString());
@@ -39,21 +41,22 @@ constructor(private fb: FormBuilder, private srv: ClientiService, private fatSrv
       });
     }
   }
-    ngOnInit(): void {
-      this.validateForm = this.fb.group({
-        data:["", [Validators.required]],
-        numero: [null, [Validators.required]],
-        anno:[null, [Validators.required]],
-        importo:[null, [Validators.required]],
-        cliente:["", [Validators.required]],
-        stato: this.fb.group({
-          id:["", [Validators.required]],
-          nome:["", [Validators.required]],
-        })
+  //ONINIT
+  ngOnInit(): void {
+    this.validateForm = this.fb.group({
+      data: ["", [Validators.required]],
+      numero: [null, [Validators.required]],
+      anno: [null, [Validators.required]],
+      importo: [null, [Validators.required]],
+      cliente: ["", [Validators.required]],
+      stato: this.fb.group({
+        id: ["", [Validators.required]],
+        nome: ["", [Validators.required]],
       })
-    }
-    ngOnDestroy(): void {
-      this.changeLanguage(it_IT)
-    }
+    })
+  }
+  ngOnDestroy(): void {
+    this.changeLanguage(it_IT)
+  }
 
 }

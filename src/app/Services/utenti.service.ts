@@ -7,10 +7,9 @@ import { environment } from 'src/environments/environment';
 })
 export class UtentiService {
 
-
-  constructor(private http:HttpClient) { }
-  getAllUsers(page:number){
-   return this.http.get(`${environment.serverAddress}/api/users?page=${page}&size=20&sort=id,ASC`)
+  constructor(private http: HttpClient) { }
+  getAllUsers(page: number) {
+    return this.http.get(`${environment.serverAddress}/api/users?page=${page}&size=20&sort=id,ASC`)
   }
 
 }

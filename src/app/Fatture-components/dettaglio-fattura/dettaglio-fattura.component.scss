@@ -4,10 +4,12 @@
   background: rgba(255, 255, 255, 0.85);
   margin: 16px;
 }
+
 .logo img {
   height: 60px;
   width: 168px;
 }
+
 nz-header {
   background: rgba(255, 255, 255, 0.2);
   padding: 0 5%;
@@ -17,7 +19,7 @@ nz-header {
 }
 
 nz-content {
-  margin: 24px 16px ;
+  margin: 24px 16px;
 }
 
 .inner-content {
@@ -25,11 +27,13 @@ nz-content {
   background: #fff;
   min-height: 100%;
 }
-.layout{
-  height:100vh;
+
+.layout {
+  height: 100vh;
 }
+
 @media screen and (max-width:510px) {
-  nz-sider{
-    z-index:20
+  nz-sider {
+    z-index: 20
   }
 }

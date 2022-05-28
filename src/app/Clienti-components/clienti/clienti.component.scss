@@ -4,10 +4,12 @@
   background: rgba(255, 255, 255, 0.85);
   margin: 16px;
 }
+
 .logo img {
   height: 60px;
   width: 168px;
 }
+
 nz-header {
   background: rgba(255, 255, 255, 0.2);
   padding: 0 5%;
@@ -17,7 +19,7 @@ nz-header {
 }
 
 nz-content {
-  margin: 24px 16px ;
+  margin: 24px 16px;
 }
 
 .inner-content {
@@ -26,15 +28,18 @@ nz-content {
   min-height: 100%;
 }
 
-.layout{
-  height:300vh;
+.layout {
+  height: 300vh;
 }
-@media screen and (max-width: 460px){
-  nz-sider{
+
+@media screen and (max-width: 460px) {
+  nz-sider {
     z-index: 20;
   }
-  td.ant-table-cell,td.ant-table-cell{
-    padding:2px;
-    margin:0px
+
+  td.ant-table-cell,
+  td.ant-table-cell {
+    padding: 2px;
+    margin: 0px
   }
 }

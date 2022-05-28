@@ -1,4 +1,5 @@
 <form nz-form [formGroup]="searchForm" (ngSubmit)="submitSearch()">
+  <!--SELECT DEL METODO DI RICERCA CLIENTE-->
   <nz-form-item>
     <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="ricerca" nzRequired>Cerca per</nz-form-label>
     <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="campo obbligatorio!">
@@ -9,6 +10,7 @@
       </nz-select>
     </nz-form-control>
   </nz-form-item>
+  <!--METODO DI RICERCA BY ID-->
   <ng-container *ngIf="byId">
     <nz-form-item>
       <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="byid">Inserisci id</nz-form-label>
@@ -22,6 +24,7 @@
       </nz-form-control>
     </nz-form-item>
   </ng-container>
+  <!--METODO DI RICERCA BY QUERY RAGIONE SOCIALE-->
   <ng-container *ngIf="byRagioneSociale">
     <nz-form-item>
       <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="byragione">Cerca ragione sociale</nz-form-label>
@@ -35,25 +38,25 @@
       </nz-form-control>
     </nz-form-item>
   </ng-container>
-  </form>
-  <!--MOSTRO RISULTATO RICERCA-->
-  <nz-table #basicTable *ngIf="risultato" [nzData]="risultato">
-    <thead>
-      <tr>
-        <th>Id</th>
-        <th>RagioneSociale</th>
-        <th>Partita IVA</th>
-        <th></th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let data of basicTable.data">
-        <td>{{ data.id }}</td>
-        <td>{{ data.ragioneSociale }}</td>
-        <td>{{ data.partitaIva }}</td>
-        <td>
-          <button nz-button nzType="primary" (click)="dettaglioCliente(data)">Dettaglio</button>
-        </td>
-      </tr>
-    </tbody>
-  </nz-table>
+</form>
+<!--MOSTRO RISULTATO RICERCA-->
+<nz-table #basicTable *ngIf="risultato" [nzData]="risultato">
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>RagioneSociale</th>
+      <th>Partita IVA</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let data of basicTable.data">
+      <td>{{ data.id }}</td>
+      <td>{{ data.ragioneSociale }}</td>
+      <td>{{ data.partitaIva }}</td>
+      <td>
+        <button nz-button nzType="primary" (click)="dettaglioCliente(data)">Dettaglio</button>
+      </td>
+    </tr>
+  </tbody>
+</nz-table>

@@ -10,18 +10,18 @@ import { AuthService } from '../authentication/auth.service';
 })
 export class LoginComponent implements OnInit {
   validateForm!: FormGroup;
-  error:boolean=false;
+  error: boolean = false;
 
   submitForm() {
     if (this.validateForm.valid) {
       console.log('submit', this.validateForm.value);
       this.authSrv.login(this.validateForm.value).subscribe(data => {
-        let json= JSON.stringify(data);
+        let json = JSON.stringify(data);
         localStorage.setItem("user", json);
         this.router.navigate(['/home'])
       }, error => {
         console.log(error);
-        this.error=true;
+        this.error = true;
       })
     }
     else {

@@ -22,7 +22,6 @@
   </nz-sider>
   <nz-layout>
     <nz-header>
-
       <nz-page-header-extra>
         <button nz-button routerLink="/register">SignUp</button>
         <button *ngIf="width>400" nz-button nzType="primary" nzDanger (click)="logout()">Logout</button>
@@ -50,50 +49,34 @@
           </ul>
         </nz-dropdown-menu>
       </nz-page-header-extra>
-
-
     </nz-header>
     <nz-content>
-
       <nz-page-header>
         <nz-page-header-title>Clienti</nz-page-header-title>
         <nz-page-header-extra>
           <button nz-button (click)="nuovoModal()">Nuovo Cliente</button>
           <button nz-button (click)="cercaModal()">Cerca Cliente</button>
         </nz-page-header-extra>
-        <nz-modal
-        nzMaskClosable="false"
-        [(nzVisible)]="isVisible"
-        [nzWidth]="modalWidth"
-        nzTitle="Crea Nuovo Cliente"
-        (nzOnCancel)="handleCancel()"
-        (nzOnOk)="handleOk()"
-        [nzOkLoading]="isOkLoading"
-      >
-        <div *nzModalContent id="creaModal">
-          <app-nuovo-cliente [comuni]="comuni" [province]="province"></app-nuovo-cliente>
-        </div>
-      </nz-modal>
-      <nz-modal
-      nzMaskClosable="false"
-      [(nzVisible)]="cercaVisible"
-      [nzWidth]="modalWidth"
-      nzTitle="Ricerca Cliente"
-      (nzOnCancel)="handleCancelCerca()"
-      (nzOnOk)="handleOkCerca()"
-    >
-      <div *nzModalContent id="creaModal">
-        <app-cerca-cliente></app-cerca-cliente>
-      </div>
-    </nz-modal>
-
+        <nz-modal nzMaskClosable="false" [(nzVisible)]="isVisible" [nzWidth]="modalWidth" nzTitle="Crea Nuovo Cliente"
+          (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()" [nzOkLoading]="isOkLoading">
+          <div *nzModalContent id="creaModal">
+            <app-nuovo-cliente [comuni]="comuni" [province]="province"></app-nuovo-cliente>
+          </div>
+        </nz-modal>
+        <nz-modal nzMaskClosable="false" [(nzVisible)]="cercaVisible" [nzWidth]="modalWidth" nzTitle="Ricerca Cliente"
+          (nzOnCancel)="handleCancelCerca()" (nzOnOk)="handleOkCerca()">
+          <div *nzModalContent id="creaModal">
+            <app-cerca-cliente></app-cerca-cliente>
+          </div>
+        </nz-modal>
         <nz-page-header-content>
           <nz-row nzType="flex">
-            <nz-statistic nzTitle="Clienti totali:" [nzValue]="totalElements" ></nz-statistic>
+            <nz-statistic nzTitle="Clienti totali:" [nzValue]="totalElements"></nz-statistic>
           </nz-row>
         </nz-page-header-content>
       </nz-page-header>
-      <nz-pagination [(nzPageIndex)]="page" [nzTotal]="totalElements/2" nzShowQuickJumper (nzPageIndexChange)="getAllClients(page)">
+      <nz-pagination [(nzPageIndex)]="page" [nzTotal]="totalElements/2" nzShowQuickJumper
+        (nzPageIndexChange)="getAllClients(page)">
       </nz-pagination>
       <br>
       <nz-table #sortTable [nzData]="clienti" nzTableLayout="fixed" [nzFrontPagination]="false">
@@ -118,7 +101,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let data of sortTable.data" >
+          <tr *ngFor="let data of sortTable.data">
             <td>{{ data.id }}</td>
             <td>{{ data.ragioneSociale }}</td>
             <td *ngIf="width>400">{{ data.email }}</td>
@@ -128,10 +111,9 @@
           </tr>
         </tbody>
       </nz-table>
-      <nz-pagination [(nzPageIndex)]="page" [nzTotal]="totalElements/2" nzShowQuickJumper (nzPageIndexChange)="getAllClients(page)">
+      <nz-pagination [(nzPageIndex)]="page" [nzTotal]="totalElements/2" nzShowQuickJumper
+        (nzPageIndexChange)="getAllClients(page)">
       </nz-pagination>
-
     </nz-content>
-
   </nz-layout>
 </nz-layout>

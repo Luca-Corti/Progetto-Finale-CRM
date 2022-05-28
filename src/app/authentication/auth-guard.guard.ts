@@ -7,12 +7,12 @@ import { AuthService } from './auth.service';
   providedIn: 'root'
 })
 export class AuthGuardGuard implements CanActivate {
-  constructor(private authSrv:AuthService, private router:Router){}
+  constructor(private authSrv: AuthService, private router: Router) { }
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    if(this.authSrv.guard()){return true}
-    else{
+    if (this.authSrv.guard()) { return true }
+    else {
       return this.router.createUrlTree(['/'])
     }
   }

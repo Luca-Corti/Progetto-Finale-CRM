@@ -6,12 +6,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./admin.component.scss']
 })
 export class AdminComponent implements OnInit {
-  deleted:boolean=false
+  deleted: boolean = false
   constructor() { }
-  deleteUser(){
-    this.deleted=true;
-    setTimeout(()=>{this.deleted=false;},2000);
-
+  deleteUser() {
+    this.deleted = true;
+    setTimeout(() => { this.deleted = false; }, 2000);
   }
   ngOnInit(): void {
   }

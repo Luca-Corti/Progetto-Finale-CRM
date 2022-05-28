@@ -19,7 +19,7 @@
   <nz-form-item>
     <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="tipoCliente" nzRequired>Tipo cliente</nz-form-label>
     <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="campo obbligatorio!">
-      <nz-select id="tipoCliente" formControlName="tipoCliente" >
+      <nz-select id="tipoCliente" formControlName="tipoCliente">
         <nz-option nzValue="SRL" nzLabel="SRL"></nz-option>
         <nz-option nzValue="SPA" nzLabel="SPA"></nz-option>
         <nz-option nzValue="SAS" nzLabel="SAS"></nz-option>
@@ -137,8 +137,7 @@
         <nz-form-item>
           <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="provincia" nzRequired>Provincia</nz-form-label>
           <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="campo obbligatorio!">
-            <nz-select id="provincia" formControlName="id"
-              (ngModelChange)="setNomeProvincia($event)">
+            <nz-select id="provincia" formControlName="id" (ngModelChange)="setNomeProvincia($event)">
               <nz-option *ngFor="let provincia of province" [nzValue]="provincia.id" [nzLabel]="provincia.nome">
               </nz-option>
             </nz-select>
@@ -152,7 +151,7 @@
         <nz-form-item>
           <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="sigla" nzRequired>Sigla pr</nz-form-label>
           <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="campo obbligatorio!">
-            <nz-select id="sigla" formControlName="sigla" >
+            <nz-select id="sigla" formControlName="sigla">
               <nz-option nzValue="FI" nzLabel="FI"></nz-option>
               <nz-option nzValue="RO" nzLabel="RO"></nz-option>
               <nz-option nzValue="NA" nzLabel="NA"></nz-option>
@@ -220,8 +219,7 @@
         <nz-form-item>
           <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="provincia" nzRequired>Provincia</nz-form-label>
           <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="campo obbligatorio!">
-            <nz-select id="provincia" formControlName="id"
-              (ngModelChange)="setNomeProvinciaLegale($event)">
+            <nz-select id="provincia" formControlName="id" (ngModelChange)="setNomeProvinciaLegale($event)">
               <nz-option *ngFor="let provincia of province" [nzValue]="provincia.id" [nzLabel]="provincia.nome">
               </nz-option>
             </nz-select>
@@ -235,7 +233,7 @@
         <nz-form-item>
           <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="sigla" nzRequired>Sigla pr</nz-form-label>
           <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="campo obbligatorio!">
-            <nz-select id="sigla" formControlName="sigla" >
+            <nz-select id="sigla" formControlName="sigla">
               <nz-option nzValue="FI" nzLabel="FI"></nz-option>
               <nz-option nzValue="RO" nzLabel="RO"></nz-option>
               <nz-option nzValue="NA" nzLabel="NA"></nz-option>
@@ -252,4 +250,3 @@
     </nz-form-control>
   </nz-form-item>
 </form>
-

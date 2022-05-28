@@ -27,15 +27,14 @@
       <h1>Admin</h1>
       <hr>
       <div class="container border">
-        <p>Nella pagina Admin un admin potrebbe modificare o cancellare un utente (azioni non contemplate lato server)</p>
+        <p>Nella pagina Admin un admin potrebbe modificare o cancellare un utente (azioni non contemplate lato server)
+        </p>
       </div>
       <div class="container buttondiv">
         <button nz-button nzType="primary" nzDanger (click)="deleteUser()">Elimina Utente</button>
 
         <h4 *ngIf="deleted">Utente eliminato per sempre :(</h4>
-
       </div>
     </nz-content>
   </nz-layout>
 </nz-layout>
-

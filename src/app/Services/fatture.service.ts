@@ -8,48 +8,50 @@ import { FatturaForm } from '../interfaces/fattura-form';
 })
 export class FattureService {
 
-  constructor(private http:HttpClient) { }
-  getAllFatture(page:number){
-   return this.http.get(`${environment.serverAddress}/api/fatture?page=${page}&size=20&sort=id,ASC`)
+  constructor(private http: HttpClient) { }
+  getAllFatture(page: number) {
+    return this.http.get(`${environment.serverAddress}/api/fatture?page=${page}&size=20&sort=id,ASC`)
   }
-  getStatiFattura(){
+  getStatiFattura() {
     return this.http.get(`${environment.serverAddress}/api/statifattura?page=0&size=20&sort=id,ASC`)
   }
-  //BY ID CLIENTE, La unpaged mi serve per fare la paginazione client side in modo da
+  //BY ID CLIENTE,
+  // Le unpaged mi servono per fare la paginazione client side in modo da:
   // 1) risparmire chiamate al server (una ogni volta che cambio pagina!!)
   // 2)snellire il codice per la ricerca fatture (app-cerca fattura)
-  getFatturaByRS(idCliente:number){
+  getFatturaByRS(idCliente: number) {
     return this.http.get(`${environment.serverAddress}/api/fatture/cliente/${idCliente}?page=0&size=2&sort=id,ASC`)
   }
-  unpagedFatturaByRS(idCliente:number, size:number){
+  unpagedFatturaByRS(idCliente: number, size: number) {
     return this.http.get(`${environment.serverAddress}/api/fatture/cliente/${idCliente}?size=${size}&sort=id,ASC`)
   }
   //BY ID FATTURA
-  getFatturaById(idFat:number){
+  getFatturaById(idFat: number) {
     return this.http.get(`${environment.serverAddress}/api/fatture/${idFat}`)
   }
-//BY STATO
-  getFatturaByStato(idStato:number){
+  //BY STATO
+  getFatturaByStato(idStato: number) {
     return this.http.get(`${environment.serverAddress}/api/fatture/stato/${idStato}?page=0&size=2&sort=id,ASC`)
   }
-  unpagedFatturaByStato(idStato:number, size:number){
+  unpagedFatturaByStato(idStato: number, size: number) {
     return this.http.get(`${environment.serverAddress}/api/fatture/stato/${idStato}?&size=${size}&sort=id,ASC`)
   }
   //BY ANNO
-  getFatturaByAnno(anno:number){
+  getFatturaByAnno(anno: number) {
     return this.http.get(`${environment.serverAddress}/api/fatture/anno/?anno=${anno}&page=0&size=2&sort=id,ASC`)
   }
-  unpagedFatturaByAnno(anno:number, size:number){
+  unpagedFatturaByAnno(anno: number, size: number) {
     return this.http.get(`${environment.serverAddress}/api/fatture/anno/?anno=${anno}&size=${size}&sort=id,ASC`)
   }
   // POST E PUT FATTURA
-  postNewFattura(fattura:FatturaForm){
+  postNewFattura(fattura: FatturaForm) {
     return this.http.post(`${environment.serverAddress}/api/fatture`, fattura)
   }
-  putFattura(fattura:FatturaForm, id:number){
+  putFattura(fattura: FatturaForm, id: number) {
     return this.http.put(`${environment.serverAddress}/api/fatture/${id}`, fattura)
   }
-  deleteFattura(idFat:number){
+  //DELETE
+  deleteFattura(idFat: number) {
     return this.http.delete(`${environment.serverAddress}/api/fatture/${idFat}`)
   }
 }

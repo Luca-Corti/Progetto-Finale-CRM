@@ -1,34 +1,38 @@
 .background1 {
-  width:100vw;
+  width: 100vw;
   height: 100vh;
-  background-image:  url(../../assets/wave-haikei.svg);
+  background-image: url(../../assets/wave-haikei.svg);
   background-size: cover;
   background-repeat: no-repeat;
   z-index: 1;
 }
+
 .background2 {
   position: fixed;
   bottom: 0;
   margin-left: 10%;
   width: 80vw;
   height: 60vh;
-  background-image:  url(../../assets/presentation-mockup.png);
+  background-image: url(../../assets/presentation-mockup.png);
   background-size: cover;
   background-repeat: no-repeat;
   z-index: 2;
 }
+
 .container {
   max-width: 80vw;
-  padding:5% 10%;
+  padding: 5% 10%;
   text-align: center;
 }
-@media screen and (max-width: 460px){
-  button{
-    z-index:5;
+
+@media screen and (max-width: 460px) {
+  button {
+    z-index: 5;
     background-color: #117DDC;
-    margin-left:-5%
+    margin-left: -5%
   }
-  .background2{
+
+  .background2 {
     background-image: none;
     z-index: -1;
   }

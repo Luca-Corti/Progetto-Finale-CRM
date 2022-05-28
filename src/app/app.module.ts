@@ -11,12 +11,12 @@ import { AdminGuard } from './authentication/admin.guard';
 import { TokenInterceptor } from './authentication/token.interceptor';
 //import ng zorro
 import { NgZorroModule } from './ng-zorro/ng-zorro.module';
-// Import icons
+// Import ICONE
 import { IconDefinition } from '@ant-design/icons-angular';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { UserOutline, FileSearchOutline, TeamOutline, UserAddOutline, LoginOutline, ArrowLeftOutline, LockOutline, MailOutline, FontColorsOutline, WarningFill} from '@ant-design/icons-angular/icons';
 const icons: IconDefinition[] = [ UserOutline, TeamOutline, FileSearchOutline, UserAddOutline, LoginOutline, ArrowLeftOutline, LockOutline, MailOutline, FontColorsOutline, WarningFill];
-//import components
+//import COMPONENTI
 import { LandingPageComponent } from './landing-page/landing-page.component';
 import { HomepageComponent } from './homepage/homepage.component';
 import { LoginComponent } from './login/login.component';
@@ -38,7 +38,6 @@ import { Error404pageComponent } from './error404page/error404page.component';
 
 //internationalization
 import { NZ_I18N, it_IT } from 'ng-zorro-antd/i18n';
-
 const customLanguagePack = {
   it_IT,
   ...{

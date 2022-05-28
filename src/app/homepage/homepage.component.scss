@@ -4,10 +4,12 @@
   background: rgba(255, 255, 255, 0.85);
   margin: 16px;
 }
+
 .logo img {
   height: 60px;
   width: 168px;
 }
+
 nz-header {
   background: rgba(255, 255, 255, 0.2);
   padding: 0 5%;
@@ -15,28 +17,34 @@ nz-header {
   justify-content: flex-end;
   align-content: center;
 }
+
 nz-content {
-  margin: 24px 16px ;
+  margin: 24px 16px;
 }
+
 .inner-content {
   padding: 24px;
   background: #fff;
   min-height: 100%;
 }
-.layout{
-  height:180vh;
+
+.layout {
+  height: 180vh;
 }
+
 .border {
-  border:1px solid white;
+  border: 1px solid white;
   border-radius: 10px;
-  padding:5px 10%;
+  padding: 5px 10%;
   margin-bottom: 5px;
 }
-@media screen and (max-width: 460px){
-  nz-sider{
+
+@media screen and (max-width: 460px) {
+  nz-sider {
     z-index: 20;
   }
-  h2{
-    margin-top:40px
+
+  h2 {
+    margin-top: 40px
   }
 }

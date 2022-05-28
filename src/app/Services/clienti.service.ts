@@ -8,31 +8,30 @@ import { ClienteForm } from '../interfaces/cliente-form';
   providedIn: 'root'
 })
 export class ClientiService {
-  constructor(private http:HttpClient) { }
+  constructor(private http: HttpClient) { }
 
-
-  getAllClients(page:number){
-   return this.http.get(`${environment.serverAddress}/api/clienti?page=${page}&size=20&sort=id,ASC`)
+  getAllClients(page: number) {
+    return this.http.get(`${environment.serverAddress}/api/clienti?page=${page}&size=20&sort=id,ASC`)
   }
-  getClienteById(id:number){
+  getClienteById(id: number) {
     return this.http.get(`${environment.serverAddress}/api/clienti/${id}`)
   }
-  getClienteByRS(query:string){
+  getClienteByRS(query: string) {
     return this.http.get(`${environment.serverAddress}/api/clienti/ragionesociale?nome=${query}`)
   }
-  postNewClient(formData:ClienteForm){
+  postNewClient(formData: ClienteForm) {
     return this.http.post(`${environment.serverAddress}/api/clienti`, formData)
   }
-  putCliente(formData:Cliente, id:number){
+  putCliente(formData: Cliente, id: number) {
     return this.http.put(`${environment.serverAddress}/api/clienti/${id}`, formData)
   }
-  deleteCliente(id:number){
+  deleteCliente(id: number) {
     return this.http.delete(`${environment.serverAddress}/api/clienti/${id}`)
   }
-  getComuni(){
+  getComuni() {
     return this.http.get(`${environment.serverAddress}/api/comuni?page=0&size=20&sort=id,ASC`)
   }
-  getProvince(){
+  getProvince() {
     return this.http.get(`${environment.serverAddress}/api/province?page=0&size=20&sort=id,ASC`)
   }
 

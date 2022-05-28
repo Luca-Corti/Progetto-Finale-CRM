@@ -7,14 +7,13 @@ import {
   HttpResponse,
   HttpErrorResponse
 } from '@angular/common/http';
-import { catchError, finalize, Observable, switchMap, take, tap, throwError } from 'rxjs';
+import { catchError, finalize, Observable, tap, throwError } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { AuthService } from './auth.service';
 
 @Injectable()
 export class TokenInterceptor implements HttpInterceptor {
 
-  constructor(private authSrv: AuthService) { }
+  constructor() { }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     let ok: string

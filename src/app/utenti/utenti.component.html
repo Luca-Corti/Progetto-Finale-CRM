@@ -22,12 +22,11 @@
   </nz-sider>
   <nz-layout>
     <nz-header>
-
       <nz-page-header-extra>
         <button nz-button routerLink="/register">SignUp</button>
         <button *ngIf="width>400" nz-button nzType="primary" nzDanger (click)="logout()">Logout</button>
         <nz-avatar nz-page-header-avatar nzSrc="https://avatars0.githubusercontent.com/u/22736418?s=88&v=4"></nz-avatar>
-        <a nz-dropdown [nzDropdownMenu]="menu" >
+        <a nz-dropdown [nzDropdownMenu]="menu">
           <nz-page-header-title>{{nomeAccount}}<i nz-icon nzType="down" style="font-size: 10px;"></i>
           </nz-page-header-title>
           <nz-page-header-tags>
@@ -50,18 +49,17 @@
           </ul>
         </nz-dropdown-menu>
       </nz-page-header-extra>
-
-
     </nz-header>
     <nz-content>
       <h1 class="m-3">Utenti</h1>
-      <nz-pagination [(nzPageIndex)]="page" [nzTotal]="totalElements/2" nzShowQuickJumper (nzPageIndexChange)="getAllUsers(page)">
+      <nz-pagination [(nzPageIndex)]="page" [nzTotal]="totalElements/2" nzShowQuickJumper
+        (nzPageIndexChange)="getAllUsers(page)">
       </nz-pagination>
       <br>
       <nz-table #sortTable [nzData]="utenti" nzTableLayout="fixed" [nzFrontPagination]="false">
         <thead>
           <tr>
-            <th >
+            <th>
               Id Utente
             </th>
             <th>
@@ -80,11 +78,9 @@
           </tr>
         </tbody>
       </nz-table>
-      <nz-pagination [(nzPageIndex)]="page" [nzTotal]="totalElements/2" nzShowQuickJumper (nzPageIndexChange)="getAllUsers(page)">
+      <nz-pagination [(nzPageIndex)]="page" [nzTotal]="totalElements/2" nzShowQuickJumper
+        (nzPageIndexChange)="getAllUsers(page)">
       </nz-pagination>
-
     </nz-content>
-
   </nz-layout>
 </nz-layout>
-

@@ -20,8 +20,8 @@ export class ClientiComponent implements OnInit {
   province!: any
   page: number = 1;
   totalElements!: number
-  width=environment.width
-  modalWidth='60vw'
+  width = environment.width
+  modalWidth = '60vw'
 
   // COLONNE CHE ORDINANO I DATI DELLA PAGINA, IN BASE A ID E FATTURATO
   colonnaId =
@@ -60,6 +60,7 @@ export class ClientiComponent implements OnInit {
       this.province = this.datiProvincia.content
     })
   }
+  //FUNZIONI LOGOUT E STATO UTENTE
   logout() {
     this.authSrv.logout()
   }
@@ -76,7 +77,7 @@ export class ClientiComponent implements OnInit {
   //VARIABILE E FUNZIONE CHE MI MANDA NEL DETTAGLIO CLIENTE
   clienteDettaglio!: any
   dettaglioCliente(dati: any): void {
-    //BUG FIX DOVUTO A MANCANZA DATI NEL SERVER
+    //---------------BUG FIX DOVUTO A MANCANZA DATI NEL SERVER---------------------
     this.clienteDettaglio = dati
     if (this.clienteDettaglio.indirizzoSedeLegale == null) {
       this.clienteDettaglio.indirizzoSedeLegale = {
@@ -123,10 +124,10 @@ export class ClientiComponent implements OnInit {
     if (this.clienteDettaglio.dataUltimoContatto == null) {
       this.clienteDettaglio.dataUltimoContatto = ""
     }
-    //FINE BUGFIX
-    localStorage.setItem('lastDetailCliente',JSON.stringify(this.clienteDettaglio))
-    localStorage.setItem('comuni',JSON.stringify(this.comuni))
-    localStorage.setItem('province',JSON.stringify(this.province))
+    //-----------------FINE BUGFIX-------------------------------------------------
+    localStorage.setItem('lastDetailCliente', JSON.stringify(this.clienteDettaglio))
+    localStorage.setItem('comuni', JSON.stringify(this.comuni))
+    localStorage.setItem('province', JSON.stringify(this.province))
     this.router.navigate(['/clienti', dati.id])
   }
   //VARIABILI PER MODALS
@@ -163,7 +164,7 @@ export class ClientiComponent implements OnInit {
     this.getAllClients(this.page - 1)
     this.getAllComuni()
     this.getAllProvince()
-    if(this.width<400){this.modalWidth='100vw'}
+    if (this.width < 400) { this.modalWidth = '100vw' }
 
   }
 

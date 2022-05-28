@@ -20,12 +20,9 @@
     Oppure
     <a routerLink="/register">registrati ora!</a>
     <div *ngIf="error">
-      <nz-alert
-      nzType="error"
-      nzMessage="Error"
-      nzDescription="Qualcosa è andato storto. Controlla che i dati inseriti siano corretti e riprova. Se il problema persiste contatta l'amministratore di sistema"
-      nzShowIcon
-    ></nz-alert>
+      <nz-alert nzType="error" nzMessage="Error"
+        nzDescription="Qualcosa è andato storto. Controlla che i dati inseriti siano corretti e riprova. Se il problema persiste contatta l'amministratore di sistema"
+        nzShowIcon></nz-alert>
     </div>
   </form>
 </div>

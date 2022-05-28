@@ -12,10 +12,11 @@ export class AppComponent {
   constructor(private i18n: NzI18nService){
     this.i18n.setLocale(it_IT);
   }
+  //ON INIT DELL'APP PRENDO LA WIDTH DEL DEVICE
   innerWidth!:number
 ngOnInit() {
     this.innerWidth = window.innerWidth;
     environment.width= this.innerWidth
-    console.log("w", environment.width)
+    console.log("width:", environment.width)
 }
 }

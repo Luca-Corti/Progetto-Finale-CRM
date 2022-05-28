@@ -69,29 +69,28 @@
       </nz-form-control>
     </nz-form-item>
   </ng-container>
-  </form>
-  <!--MOSTRO RISULTATO RICERCA-->
-  <h2 *ngIf="loading">Loading...</h2>
-  <nz-table #basicTable *ngIf="risultato" [nzData]="risultato" [nzTotal]="totalElements">
-    <thead>
-      <tr>
-        <th>Id</th>
-        <th>Importo</th>
-        <th>Stato</th>
-        <th>Anno</th>
-        <th></th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let data of basicTable.data">
-        <td>{{ data.id }}</td>
-        <td>{{ data.importo }}</td>
-        <td>{{ data.stato.nome }}</td>
-        <td>{{ data.anno }}</td>
-        <td>
-          <button nz-button nzType="primary" (click)="dettaglioFattura(data)" >Dettaglio</button>
-        </td>
-      </tr>
-    </tbody>
-  </nz-table>
-
+</form>
+<!--MOSTRO RISULTATO RICERCA-->
+<h2 *ngIf="loading">Loading...</h2>
+<nz-table #basicTable *ngIf="risultato" [nzData]="risultato" [nzTotal]="totalElements">
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>Importo</th>
+      <th>Stato</th>
+      <th>Anno</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let data of basicTable.data">
+      <td>{{ data.id }}</td>
+      <td>{{ data.importo }}</td>
+      <td>{{ data.stato.nome }}</td>
+      <td>{{ data.anno }}</td>
+      <td>
+        <button nz-button nzType="primary" (click)="dettaglioFattura(data)">Dettaglio</button>
+      </td>
+    </tr>
+  </tbody>
+</nz-table>

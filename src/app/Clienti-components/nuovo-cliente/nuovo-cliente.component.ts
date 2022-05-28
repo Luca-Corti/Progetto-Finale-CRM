@@ -13,7 +13,7 @@ export class NuovoClienteComponent implements OnInit, OnDestroy {
   validateForm!: FormGroup;
   @Input() comuni!: any
   @Input() province!: any
-
+  //SET DEI NOMI COMUNE/PROVINCIA IN BASE AD ID DAL SELECT
   setNomeComune(value: string): void {
     let find = this.comuni.find((ele: any) => ele.id == value)
     this.validateForm.get('indirizzoSedeOperativa.comune.nome')!.setValue(find.nome);
@@ -30,7 +30,7 @@ export class NuovoClienteComponent implements OnInit, OnDestroy {
     let find = this.province.find((ele: any) => ele.id == value)
     this.validateForm.get('indirizzoSedeLegale.comune.provincia.nome')!.setValue(find.nome);
   }
-
+  //SUBMIT
   submitForm(): void {
     this.validateForm.value.dataUltimoContatto = this.validateForm.value.dataUltimoContatto.toISOString()
     if (this.validateForm.valid) {
@@ -99,8 +99,6 @@ export class NuovoClienteComponent implements OnInit, OnDestroy {
         dataInserimento: [new Date().toISOString()],
         dataUltimoContatto: [""]
       });
-    console.log(this.comuni)
-    console.log(this.province)
   }
   ngOnDestroy(): void {
     this.changeLanguage(it_IT)
