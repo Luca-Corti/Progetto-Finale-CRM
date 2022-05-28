@@ -34,9 +34,11 @@ import { FatturaDaClientiComponent } from './Fatture-components/fattura-da-clien
 import { CercaClienteComponent } from './Clienti-components/cerca-cliente/cerca-cliente.component';
 import { CercaFatturaComponent } from './Fatture-components/cerca-fattura/cerca-fattura.component';
 import { AdminComponent } from './admin/admin.component';
+import { Error404pageComponent } from './error404page/error404page.component';
 
 //internationalization
 import { NZ_I18N, it_IT } from 'ng-zorro-antd/i18n';
+
 const customLanguagePack = {
   it_IT,
   ...{
@@ -94,6 +96,10 @@ const routes:Route[] = [
     path:"admin",
     component:AdminComponent,
     canActivate:[AdminGuard]
+  },
+  {
+    path:"**",
+    component:Error404pageComponent
   }
 ]
 
@@ -116,7 +122,8 @@ const routes:Route[] = [
     FatturaDaClientiComponent,
     CercaClienteComponent,
     CercaFatturaComponent,
-    AdminComponent
+    AdminComponent,
+    Error404pageComponent
   ],
   imports: [
     BrowserModule,
