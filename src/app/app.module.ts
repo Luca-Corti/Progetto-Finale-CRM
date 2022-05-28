@@ -7,12 +7,15 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AuthGuardGuard } from './authentication/auth-guard.guard';
 import { LoginGuardGuard } from './authentication/login-guard.guard';
+import { AdminGuard } from './authentication/admin.guard';
 import { TokenInterceptor } from './authentication/token.interceptor';
+//import ng zorro
+import { NgZorroModule } from './ng-zorro/ng-zorro.module';
 // Import icons
 import { IconDefinition } from '@ant-design/icons-angular';
 import { NzIconModule } from 'ng-zorro-antd/icon';
-import { UserOutline, FileSearchOutline, TeamOutline, UserAddOutline, LoginOutline, ArrowLeftOutline, LockOutline, MailOutline} from '@ant-design/icons-angular/icons';
-const icons: IconDefinition[] = [ UserOutline, TeamOutline, FileSearchOutline, UserAddOutline, LoginOutline, ArrowLeftOutline, LockOutline, MailOutline];
+import { UserOutline, FileSearchOutline, TeamOutline, UserAddOutline, LoginOutline, ArrowLeftOutline, LockOutline, MailOutline, FontColorsOutline} from '@ant-design/icons-angular/icons';
+const icons: IconDefinition[] = [ UserOutline, TeamOutline, FileSearchOutline, UserAddOutline, LoginOutline, ArrowLeftOutline, LockOutline, MailOutline, FontColorsOutline];
 //import components
 import { LandingPageComponent } from './landing-page/landing-page.component';
 import { HomepageComponent } from './homepage/homepage.component';
@@ -30,8 +33,8 @@ import { ModificaFatturaComponent } from './Fatture-components/modifica-fattura/
 import { FatturaDaClientiComponent } from './Fatture-components/fattura-da-clienti/fattura-da-clienti.component';
 import { CercaClienteComponent } from './Clienti-components/cerca-cliente/cerca-cliente.component';
 import { CercaFatturaComponent } from './Fatture-components/cerca-fattura/cerca-fattura.component';
-//import ng zorro
-import { NgZorroModule } from './ng-zorro/ng-zorro.module';
+import { AdminComponent } from './admin/admin.component';
+
 //internationalization
 import { NZ_I18N, it_IT } from 'ng-zorro-antd/i18n';
 const customLanguagePack = {
@@ -86,6 +89,11 @@ const routes:Route[] = [
     path:"utenti",
     component:UtentiComponent,
     canActivate:[AuthGuardGuard]
+  },
+  {
+    path:"admin",
+    component:AdminComponent,
+    canActivate:[AdminGuard]
   }
 ]
 
@@ -108,6 +116,7 @@ const routes:Route[] = [
     FatturaDaClientiComponent,
     CercaClienteComponent,
     CercaFatturaComponent,
+    AdminComponent
   ],
   imports: [
     BrowserModule,

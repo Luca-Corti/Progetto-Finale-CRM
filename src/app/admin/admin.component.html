@@ -1,0 +1,41 @@
+<nz-layout class="layout">
+  <nz-sider nzCollapsible nzBreakpoint="lg" [nzCollapsedWidth]="0">
+    <div class="logo" routerLink="/home"></div>
+    <ul nz-menu nzTheme="dark" nzMode="inline">
+      <li nz-menu-item routerLink="/clienti">
+        <i nz-icon nzType="user" nzTheme="outline"></i>
+        <span>Clienti</span>
+      </li>
+      <li nz-menu-item routerLink="/fatture">
+        <i nz-icon nzType="file-search" nzTheme="outline"></i>
+        <span>Fatture</span>
+      </li>
+      <li nz-menu-item routerLink="/utenti">
+        <i nz-icon nzType="team" nzTheme="outline"></i>
+        <span>Utenti</span>
+      </li>
+      <li nz-menu-item routerLink="/admin" routerLinkActive="ant-menu-item-selected">
+        <i nz-icon nzType="font-colors" nzTheme="outline"></i>
+        <span>Admin</span>
+      </li>
+    </ul>
+  </nz-sider>
+  <nz-layout>
+    <nz-header>
+    </nz-header>
+    <nz-content>
+      <h1>Admin</h1>
+      <hr>
+      <div class="container border">
+        <p>Nella pagina Admin un admin potrebbe modificare o cancellare un utente (azioni non contemplate lato server)</p>
+      </div>
+      <div class="container buttondiv">
+        <button nz-button nzType="primary" nzDanger (click)="deleteUser()">Elimina Utente</button>
+
+        <h4 *ngIf="deleted">Utente eliminato per sempre :(</h4>
+
+      </div>
+    </nz-content>
+  </nz-layout>
+</nz-layout>
+
