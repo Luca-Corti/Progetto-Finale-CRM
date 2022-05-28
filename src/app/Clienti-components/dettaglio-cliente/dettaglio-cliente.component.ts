@@ -1,6 +1,6 @@
 
 import { Component, OnDestroy, OnInit, } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { AuthService } from 'src/app/authentication/auth.service';
 import { FattureService } from 'src/app/Services/fatture.service';
@@ -14,16 +14,17 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./dettaglio-cliente.component.scss']
 })
 export class DettaglioClienteComponent implements OnInit, OnDestroy {
-  clienteDettaglio:any=this.srv.clienteDettaglio
-  nomeAccount=this.authSrv.user.username
-  constructor(private srv:ClientiService,private fatSrv:FattureService, private router:Router, private modal: NzModalService, private authSrv:AuthService) {
-    if(this.clienteDettaglio==null){
-      this.errors=true;
+
+  constructor(private srv:ClientiService,private fatSrv:FattureService, private router:Router,private rotta:ActivatedRoute, private modal: NzModalService, private authSrv:AuthService) {
+    this.idRotta = this.rotta.snapshot.params['id']
     }
-   }
-   width=environment.width
+
+  idRotta:number|string
+  width=environment.width
    modalWidth='60vw'
    errors:boolean=false
+   clienteDettaglio:any
+  nomeAccount=this.authSrv.user.username
   onBack(){
     this.router.navigate(['/clienti'])
   }
@@ -87,7 +88,6 @@ export class DettaglioClienteComponent implements OnInit, OnDestroy {
     this.srv.deleteCliente(id).subscribe()
   }
   stati:any
-
   getStatiFattura(){
     this.fatSrv.getStatiFattura().subscribe((data)=>{
       this.stati=data
@@ -100,10 +100,20 @@ export class DettaglioClienteComponent implements OnInit, OnDestroy {
   }
   ngOnInit(): void {
     this.getStatiFattura()
+    let json= localStorage.getItem('lastDetailCliente')
+    if(json){this.clienteDettaglio=JSON.parse(json)}
+    else{this.errors=true}
+
+    if(this.idRotta==this.clienteDettaglio.id){
+      return
+    }
+    else{
+      this.router.navigate(['/clienti'])
+    }
     if(this.width<400){this.modalWidth='100vw'}
   }
   ngOnDestroy(): void {
-    this.srv.clienteDettaglio = { }
+
 
   }
 

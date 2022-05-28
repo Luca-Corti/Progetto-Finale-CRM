@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { en_US, it_IT, NzI18nService } from 'ng-zorro-antd/i18n';
 import { Cliente } from '../../interfaces/cliente';
 import { ClientiService } from '../../Services/clienti.service';
@@ -14,8 +15,8 @@ export class ModificaClienteComponent implements OnInit {
   validateForm!: FormGroup;
   @Input() clienteDettaglio!:any
 
-comuni:any=this.srv.comuni
-province:any=this.srv.province
+  comuni:any
+  province:any
 
 
   setNomeComune(value: string): void {
@@ -50,13 +51,27 @@ province:any=this.srv.province
     }
   }
 
-  constructor(private fb: FormBuilder, private srv: ClientiService, private i18n: NzI18nService) {
+  constructor(private fb: FormBuilder, private srv: ClientiService, private i18n: NzI18nService, ) {
+
+    let jsonComuni= localStorage.getItem('comuni');
+    if(jsonComuni){
+      this.comuni=JSON.parse(jsonComuni)
+      console.log(this.comuni)
+    }
+    else{};
+    let jsonProvince= localStorage.getItem('province');
+    if(jsonProvince){
+      this.province=JSON.parse(jsonProvince)
+      console.log(this.province)
+    }
+    else{};
     this.changeLanguage(en_US)
   }
   changeLanguage(value: any): void {
     this.i18n.setLocale(value)
   }
   ngOnInit(): void {
+
     this.validateForm = this.fb.group(
       { id:[this.clienteDettaglio.id],
         ragioneSociale: [this.clienteDettaglio.ragioneSociale, [Validators.required]],

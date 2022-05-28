@@ -124,10 +124,9 @@ export class ClientiComponent implements OnInit {
       this.clienteDettaglio.dataUltimoContatto = ""
     }
     //FINE BUGFIX
-    this.srv.clienteDettaglio = this.clienteDettaglio
-    this.srv.comuni = this.comuni
-    this.srv.province = this.province
-    console.log(this.srv.clienteDettaglio)
+    localStorage.setItem('lastDetailCliente',JSON.stringify(this.clienteDettaglio))
+    localStorage.setItem('comuni',JSON.stringify(this.comuni))
+    localStorage.setItem('province',JSON.stringify(this.province))
     this.router.navigate(['/clienti', dati.id])
   }
   //VARIABILI PER MODALS

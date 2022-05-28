@@ -9,9 +9,7 @@ import { ClienteForm } from '../interfaces/cliente-form';
 })
 export class ClientiService {
   constructor(private http:HttpClient) { }
-  clienteDettaglio = { }
-  province:any
-  comuni:any
+
 
   getAllClients(page:number){
    return this.http.get(`${environment.serverAddress}/api/clienti?page=${page}&size=20&sort=id,ASC`)
