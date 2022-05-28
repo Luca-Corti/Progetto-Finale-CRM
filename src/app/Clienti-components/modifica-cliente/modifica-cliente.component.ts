@@ -32,13 +32,20 @@ export class ModificaClienteComponent implements OnInit {
     this.validateForm.get('indirizzoSedeLegale.comune.provincia.nome')!.setValue(find.nome);
   }
   //SUBMIT
+  success:boolean=false;
+  error:boolean=false;
   submitForm(): void {
     if (this.validateForm.valid) {
       console.log('submit', this.validateForm.value);
-      this.srv.putCliente(this.validateForm.value, this.clienteDettaglio.id).subscribe();
+      this.srv.putCliente(this.validateForm.value, this.clienteDettaglio.id).subscribe(
+        ()=>{this.success=true;this.error=false},
+        ()=>{this.success=false;this.error=true}
+      );
       localStorage.setItem('lastDetailCliente', JSON.stringify(this.validateForm.value))
     } else {
       console.log('invalid submit', this.validateForm.value)
+      this.success=false
+      this.error=true
       Object.values(this.validateForm.controls).forEach(control => {
         if (control.invalid) {
           control.markAsDirty();

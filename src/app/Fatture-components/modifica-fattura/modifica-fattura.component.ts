@@ -10,6 +10,8 @@ import { FattureService } from 'src/app/Services/fatture.service';
 export class ModificaFatturaComponent implements OnInit {
   @Input() fatturaDettaglio: any
   stati: any
+  success:boolean=false
+  error:boolean=false
 
   constructor(private fatSrv: FattureService, private fb: FormBuilder) { }
   validateForm!: FormGroup;
@@ -21,11 +23,16 @@ export class ModificaFatturaComponent implements OnInit {
   submitForm(): void {
     if (this.validateForm.valid) {
       console.log('submit', this.validateForm.value);
-      this.fatSrv.putFattura(this.validateForm.value, this.fatturaDettaglio.id).subscribe();
+      this.fatSrv.putFattura(this.validateForm.value, this.fatturaDettaglio.id).subscribe(
+        ()=>{this.success=true;this.error=false},
+        ()=>{this.success=false;this.error=true}
+      );
       localStorage.setItem('LastDetailFattura', JSON.stringify(this.validateForm.value))
 
     } else {
       console.log('invalid submit', this.validateForm.value)
+      this.success=false;
+      this.error=true;
       Object.values(this.validateForm.controls).forEach(control => {
         if (control.invalid) {
           control.markAsDirty();

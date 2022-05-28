@@ -94,11 +94,14 @@ export class FattureComponent implements OnInit {
     localStorage.setItem('LastDetailFattura', JSON.stringify(this.fatturaDettaglio))
     this.router.navigate(['/fatture', dati.id])
   }
+  loading:boolean=false
   getAllFatture(page: number) {
+    this.loading=true
     this.fatSrv.getAllFatture(page - 1).subscribe((data) => {
       this.dati = data
       this.totalElements = this.dati.totalElements
       this.fatture = this.dati.content
+      this.loading=false
     })
   }
   getStatiFattura() {

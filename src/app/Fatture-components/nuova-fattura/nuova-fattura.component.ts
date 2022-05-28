@@ -43,13 +43,13 @@ export class NuovaFatturaComponent implements OnInit, OnDestroy {
     this.srv.getClienteById(id).subscribe(data => {
       this.risultato = []
       this.risultato.push(data)
-    })
+    },()=>{this.error=true;this.success=false})
   }
   getClienteByRagioneSociale(query: string) {
     this.srv.getClienteByRS(query).subscribe(data => {
       this.risultato = data
       this.risultato = this.risultato.content
-    })
+    },()=>{this.error=true;this.success=false})
   }
 
   select(cliente: Cliente) {
@@ -60,14 +60,20 @@ export class NuovaFatturaComponent implements OnInit, OnDestroy {
     let find = this.stati.find((ele: any) => ele.nome == value)
     this.validateForm.get('stato.id')!.setValue(find.id);
   }
+  success:boolean=false
+  error:boolean=false
   submitForm(): void {
     this.validateForm.get('cliente')!.setValue(this.cliente);
     this.validateForm.get('data')!.setValue(this.validateForm.value.data.toISOString());
     if (this.validateForm.valid) {
       console.log('submit', this.validateForm.value);
-      this.fatSrv.postNewFattura(this.validateForm.value).subscribe();
+      this.fatSrv.postNewFattura(this.validateForm.value).subscribe(
+      ()=>{this.success=true;this.error=false},
+      ()=>{this.success=false;this.error=true});
     } else {
       console.log('invalid submit', this.validateForm.value)
+      this.success=false
+      this.error=true
       Object.values(this.validateForm.controls).forEach(control => {
         if (control.invalid) {
           control.markAsDirty();

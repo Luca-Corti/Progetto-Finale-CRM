@@ -25,14 +25,20 @@ export class FatturaDaClientiComponent implements OnInit {
     this.validateForm.get('stato.id')!.setValue(find.id);
   }
   //SUBMIT
+  success:boolean=false
+  error:boolean=false
   submitForm(): void {
     this.validateForm.get('cliente')!.setValue(this.clienteDettaglio);
     this.validateForm.get('data')!.setValue(this.validateForm.value.data.toISOString());
     if (this.validateForm.valid) {
       console.log('submit', this.validateForm.value);
-      this.fatSrv.postNewFattura(this.validateForm.value).subscribe();
+      this.fatSrv.postNewFattura(this.validateForm.value).subscribe(
+        ()=>{this.success=true;this.error=false},
+        ()=>{this.success=false;this.error=true}
+      );
     } else {
       console.log('invalid submit', this.validateForm.value)
+      this.success=false;this.error=true;
       Object.values(this.validateForm.controls).forEach(control => {
         if (control.invalid) {
           control.markAsDirty();

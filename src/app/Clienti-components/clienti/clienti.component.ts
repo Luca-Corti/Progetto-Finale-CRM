@@ -41,11 +41,14 @@ export class ClientiComponent implements OnInit {
     };
 
   constructor(private srv: ClientiService, private router: Router, private authSrv: AuthService) { }
+  loading:boolean=false
   getAllClients(page: number) {
+    this.loading=true
     this.srv.getAllClients(page - 1).subscribe((data) => {
       this.dati = data
       this.totalElements = this.dati.totalElements
       this.clienti = this.dati.content
+      this.loading=false
     })
   }
   getAllComuni() {

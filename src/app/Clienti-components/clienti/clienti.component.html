@@ -71,7 +71,8 @@
         </nz-modal>
         <nz-page-header-content>
           <nz-row nzType="flex">
-            <nz-statistic nzTitle="Clienti totali:" [nzValue]="totalElements"></nz-statistic>
+            <nz-statistic *ngIf="!loading;else load" nzTitle="Clienti totali:" [nzValue]="totalElements"></nz-statistic>
+            <ng-template #load>Loading...</ng-template>
           </nz-row>
         </nz-page-header-content>
       </nz-page-header>

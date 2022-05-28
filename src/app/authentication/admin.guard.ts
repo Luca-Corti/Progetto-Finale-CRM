@@ -21,6 +21,7 @@ export class AdminGuard implements CanActivate {
       return true
     }
     else {
+      alert('Non hai i permessi necessari per visualizzare questa pagina')
       return this.router.createUrlTree(['/home'])
     }
   }
