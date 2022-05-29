@@ -20,10 +20,10 @@ export class AuthService {
   isLoggedIn = this.user$.pipe(map(user => !!user))
 
   signup(formData: SignupData) {
-    return this.http.post(environment.serverAddress + "/api/auth/signup", formData)
+    return this.http.post(environment.serverAddress+"/api/auth/signup", formData)
   }
   login(formData: LoginData) {
-    return this.http.post<AuthData>(environment.serverAddress + "/api/auth/login", formData).pipe(tap(
+    return this.http.post<AuthData>(environment.serverAddress+"/api/auth/login", formData).pipe(tap(
       (data) => { this.authSubject.next(data) })
     );
   }
