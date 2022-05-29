@@ -38,6 +38,7 @@ import { Error404pageComponent } from './error404page/error404page.component';
 
 //internationalization
 import { NZ_I18N, it_IT } from 'ng-zorro-antd/i18n';
+import { SidebarComponent } from './sidebar/sidebar.component';
 const customLanguagePack = {
   it_IT,
   ...{
@@ -122,7 +123,8 @@ const routes:Route[] = [
     CercaClienteComponent,
     CercaFatturaComponent,
     AdminComponent,
-    Error404pageComponent
+    Error404pageComponent,
+    SidebarComponent
   ],
   imports: [
     BrowserModule,
