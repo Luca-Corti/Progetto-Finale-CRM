@@ -35,10 +35,11 @@ import { CercaClienteComponent } from './Clienti-components/cerca-cliente/cerca-
 import { CercaFatturaComponent } from './Fatture-components/cerca-fattura/cerca-fattura.component';
 import { AdminComponent } from './admin/admin.component';
 import { Error404pageComponent } from './error404page/error404page.component';
+import { SidebarComponent } from './sidebar/sidebar.component';
+import { HeaderComponent } from './header/header.component';
 
 //internationalization
 import { NZ_I18N, it_IT } from 'ng-zorro-antd/i18n';
-import { SidebarComponent } from './sidebar/sidebar.component';
 const customLanguagePack = {
   it_IT,
   ...{
@@ -124,7 +125,8 @@ const routes:Route[] = [
     CercaFatturaComponent,
     AdminComponent,
     Error404pageComponent,
-    SidebarComponent
+    SidebarComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,

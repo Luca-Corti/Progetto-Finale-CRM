@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthService } from 'src/app/authentication/auth.service';
 import { Fattura } from '../../interfaces/fattura';
 import { FattureService } from '../../Services/fatture.service';
 import { environment } from 'src/environments/environment';
@@ -43,22 +42,8 @@ export class FattureComponent implements OnInit {
       },
       priority: 3
     };
-  nomeAccount = this.authSrv.user.username
+  constructor(private fatSrv: FattureService, private router: Router) { }
 
-  constructor(private fatSrv: FattureService, private router: Router, private authSrv: AuthService) { }
-  logout() {
-    this.authSrv.logout()
-  }
-  status = {
-    name: 'Online',
-    color: 'green'
-  }
-  changeStatus(value: string) {
-    if (value == 'Online') { this.status.name = 'Online'; this.status.color = 'green' }
-    else if (value == 'Offline') { this.status.name = 'Offline'; this.status.color = 'red' }
-    else if (value == 'ND') { this.status.name = 'Non disponibile'; this.status.color = 'gold' }
-    else if (value == 'Invisibile') { this.status.name = 'Invisibile'; this.status.color = '' }
-  }
   //MODALE
   isVisible = false;
   isOkLoading = false;

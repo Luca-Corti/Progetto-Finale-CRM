@@ -5,9 +5,11 @@
 export const environment = {
   production: false,
   serverAddress:"https://epicode.online/epicodebeservice_v2",
-  adminToken:"eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJQbGFmb25lIiwiaWF0IjoxNjUzNjk1MzU5LCJleHAiOjE2NTM3ODE3NTl9.bigeM6m_qoJ5ptsR9Jkh7KnNF95t5nnDPxtYQ9w2MY59Bx5h3Z5_X2Lga4aUsRbynePTUcCk0cf_GZD7-_6R8Q",
+  //token lungo
+  adminToken:"eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTY1MzYzNDk3MCwiZXhwIjoxOTY4OTk0OTcwfQ.nmy6C4yG_BJfiynBps8YV5faHQ9gaV_0LoEyKm5uMARE5xg8PSdcYzpTtYGQxX_JOXHK9c8wFihrMiLhuh8cvA",
   tenantId:"fe_0222a",
-  width: 0
+  width: 0,
+  userToken:""
 };
 
 /*

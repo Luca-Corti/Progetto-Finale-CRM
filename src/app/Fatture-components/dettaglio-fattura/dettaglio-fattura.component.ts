@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NzModalService } from 'ng-zorro-antd/modal';
-import { AuthService } from 'src/app/authentication/auth.service';
 import { FattureService } from 'src/app/Services/fatture.service';
 import { environment } from 'src/environments/environment';
 
@@ -13,29 +12,19 @@ import { environment } from 'src/environments/environment';
 export class DettaglioFatturaComponent implements OnInit {
 
   fatturaDettaglio: any
-  nomeAccount = this.authSrv.user.username
   width = environment.width
   modalWidth = '60vw'
   errors: boolean = false
   idRotta: number | string;
 
-  constructor(private router: Router, private fatSrv: FattureService, private modal: NzModalService, private authSrv: AuthService, private rotta: ActivatedRoute) {
+  constructor(private router: Router, private fatSrv: FattureService, private modal: NzModalService, private rotta: ActivatedRoute) {
     this.idRotta = this.rotta.snapshot.params['id']
   }
 
   onBack() {
     this.router.navigate(['/fatture'])
   }
-  status = {
-    name: 'Online',
-    color: 'green'
-  }
-  changeStatus(value: string) {
-    if (value == 'Online') { this.status.name = 'Online'; this.status.color = 'green' }
-    else if (value == 'Offline') { this.status.name = 'Offline'; this.status.color = 'red' }
-    else if (value == 'ND') { this.status.name = 'Non disponibile'; this.status.color = 'gold' }
-    else if (value == 'Invisibile') { this.status.name = 'Invisibile'; this.status.color = '' }
-  }
+
   isVisible = false;
   isOkLoading = false;
   //MODALE
@@ -73,9 +62,7 @@ export class DettaglioFatturaComponent implements OnInit {
   deleteFattura(id: number) {
     this.fatSrv.deleteFattura(id).subscribe()
   }
-  logout() {
-    this.authSrv.logout()
-  }
+
   //ONINIT RECUPERO DATI DA LOCALSTORAGE E VERIFICO CHE UTENTE VENGA DALLA GIUSTA ROTTA
   ngOnInit(): void {
     let json = localStorage.getItem('LastDetailFattura')

@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthService } from 'src/app/authentication/auth.service';
 import { Cliente } from '../../interfaces/cliente';
 import { ClientiService } from '../../Services/clienti.service';
 import { environment } from 'src/environments/environment';
@@ -11,7 +10,6 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./clienti.component.scss']
 })
 export class ClientiComponent implements OnInit {
-  nomeAccount = this.authSrv.user.username
   dati: any;
   datiComune: any
   datiProvincia: any
@@ -40,7 +38,7 @@ export class ClientiComponent implements OnInit {
       priority: 4
     };
 
-  constructor(private srv: ClientiService, private router: Router, private authSrv: AuthService) { }
+  constructor(private srv: ClientiService, private router: Router) { }
   loading:boolean=false
   getAllClients(page: number) {
     this.loading=true
@@ -62,20 +60,6 @@ export class ClientiComponent implements OnInit {
       this.datiProvincia = data
       this.province = this.datiProvincia.content
     })
-  }
-  //FUNZIONI LOGOUT E STATO UTENTE
-  logout() {
-    this.authSrv.logout()
-  }
-  status = {
-    name: 'Online',
-    color: 'green'
-  }
-  changeStatus(value: string) {
-    if (value == 'Online') { this.status.name = 'Online'; this.status.color = 'green' }
-    else if (value == 'Offline') { this.status.name = 'Offline'; this.status.color = 'red' }
-    else if (value == 'ND') { this.status.name = 'Non disponibile'; this.status.color = 'gold' }
-    else if (value == 'Invisibile') { this.status.name = 'Invisibile'; this.status.color = '' }
   }
   //VARIABILE E FUNZIONE CHE MI MANDA NEL DETTAGLIO CLIENTE
   clienteDettaglio!: any

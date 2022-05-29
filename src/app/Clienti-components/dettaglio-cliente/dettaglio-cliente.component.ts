@@ -1,7 +1,6 @@
 import { Component, OnInit, } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NzModalService } from 'ng-zorro-antd/modal';
-import { AuthService } from 'src/app/authentication/auth.service';
 import { FattureService } from 'src/app/Services/fatture.service';
 import { ClientiService } from '../../Services/clienti.service';
 import { environment } from 'src/environments/environment';
@@ -13,7 +12,7 @@ import { environment } from 'src/environments/environment';
 })
 export class DettaglioClienteComponent implements OnInit {
 
-  constructor(private srv: ClientiService, private fatSrv: FattureService, private router: Router, private rotta: ActivatedRoute, private modal: NzModalService, private authSrv: AuthService) {
+  constructor(private srv: ClientiService, private fatSrv: FattureService, private router: Router, private rotta: ActivatedRoute, private modal: NzModalService) {
     this.idRotta = this.rotta.snapshot.params['id']
   }
 
@@ -22,23 +21,10 @@ export class DettaglioClienteComponent implements OnInit {
   modalWidth = '60vw'
   errors: boolean = false
   clienteDettaglio: any
-  nomeAccount = this.authSrv.user.username
   onBack() {
     this.router.navigate(['/clienti'])
   }
-  status = {
-    name: 'Online',
-    color: 'green'
-  }
-  changeStatus(value: string) {
-    if (value == 'Online') { this.status.name = 'Online'; this.status.color = 'green' }
-    else if (value == 'Offline') { this.status.name = 'Offline'; this.status.color = 'red' }
-    else if (value == 'ND') { this.status.name = 'Non disponibile'; this.status.color = 'gold' }
-    else if (value == 'Invisibile') { this.status.name = 'Invisibile'; this.status.color = '' }
-  }
-  logout() {
-    this.authSrv.logout()
-  }
+
   //MODALE MODIFICA
   isVisible = false;
   isOkLoading = false;

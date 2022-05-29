@@ -1,4 +1,3 @@
-
 nz-header {
   background: rgba(255, 255, 255, 0.2);
   padding: 0 5%;
@@ -6,11 +5,9 @@ nz-header {
   justify-content: flex-end;
   align-content: center;
 }
-
 nz-content {
   margin: 24px 16px;
 }
-
 .inner-content {
   padding: 24px;
   background: #fff;
@@ -27,9 +24,7 @@ nz-content {
   padding: 5px 10%;
   margin-bottom: 5px;
 }
-
 @media screen and (max-width: 460px) {
-
   h2 {
     margin-top: 40px
   }
